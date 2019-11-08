@@ -1,0 +1,84 @@
+#!/bin/bash
+
+ARCH="$(uname -m)"
+echo *** Arch: $ARCH
+#ARM="arm-linux-gnueabi-gcc"
+ARM="arm-linux-gnueabihf-gcc"
+ARM64=
+[[ "$ARCH" =~ ^.*64$ ]] && ARM64="aarch64-linux-gnu-gcc"
+
+#OPTS="-O3 -Wall -Wparentheses -ftree-vectorize"
+OPTS="-O3 -Wall -ftree-vectorize"
+OPTS32="$OPTS -mneon-for-64bits -mfloat-abi=hard -mlittle-endian -munaligned-access"
+OPTS64="$OPTS -mlittle-endian"
+
+exec( )
+{
+	echo \#$*
+	$*
+	[ $? -eq 0 ] || exit $?
+}
+
+
+####################
+# RPi3
+#
+echo ""
+[ -n "$ARM64" ] && echo "*** RPi3 [ARMv8, cortex-a53] (64-bit)"
+[ -n "$ARM64" ] && exec $ARM64 $OPTS64 -march=armv8-a -mcpu=cortex-a53 -mfix-cortex-a53-835769 -mfix-cortex-a53-843419 bitscan.c -Wa,-aln=bitscan-a53-64.lst -o bitscan-a53-64
+[ -n "$ARM64" ] && echo "*** RPi3 [ARMv8, cortex-a53] (ilp32 test compilation)"
+[ -n "$ARM64" ] && exec $ARM64 $OPTS64 -march=armv8-a -mcpu=cortex-a53 -mabi=ilp32 -mfix-cortex-a53-835769 -mfix-cortex-a53-843419 bitscan.c -c -Wa,-aln=bitscan-a53-ilp32.lst
+echo "*** RPi3 [ARMv8, cortex-a53] (32-bit)"
+#exec $ARM $OPTS32 -march=armv8-a -mcpu=cortex-a53 -mfpu=neon-fp-armv8 bitscan.c -Wa,-aln=bitscan-a53-32.lst -o bitscan-a53-32
+exec $ARM $OPTS32 -mcpu=cortex-a53 -mfpu=neon-fp-armv8 bitscan.c -Wa,-aln=bitscan-a53-32.lst -o bitscan-a53-32
+
+####################
+# cortex-a57
+#
+echo ""
+[ -n "$ARM64" ] && echo "*** [ARMv8, cortex-a57] (64-bit)"
+[ -n "$ARM64" ] && exec $ARM64 $OPTS64 -march=armv8-a -mcpu=cortex-a57 bitscan.c -Wa,-aln=bitscan-a57-64.lst -o bitscan-a57-64
+[ -n "$ARM64" ] && echo "*** [ARMv8, cortex-a57] (ilp32 test compilation)"
+[ -n "$ARM64" ] && exec $ARM64 $OPTS64 -march=armv8-a -mcpu=cortex-a57 -mabi=ilp32 bitscan.c -Wa,-aln=bitscan-a57-ilp32.lst -c
+echo "*** [ARMv8, cortex-a57] (32-bit)"
+#exec $ARM $OPTS32 -march=armv8-a -mcpu=cortex-a57 -mfpu=neon-fp-armv8 bitscan.c -Wa,-aln=bitscan-a57-32.lst -o bitscan-a57-32
+exec $ARM $OPTS32 -mcpu=cortex-a57 -mfpu=neon-fp-armv8 bitscan.c -Wa,-aln=bitscan-a57-32.lst -o bitscan-a57-32
+
+####################
+# RPi2
+#
+echo ""
+echo "*** RPi2 [ARMv7, cortex-a7]"
+#exec $ARM $OPTS32 -march=armv7 -mcpu=cortex-a7 -mfpu=neon-vfpv4 bitscan.c -Wa,-aln=bitscan-armv7.lst -o bitscan-armv7
+exec $ARM $OPTS32 -mcpu=cortex-a7 -mfpu=neon-vfpv4 bitscan.c -Wa,-aln=bitscan-a7.lst -o bitscan-a7
+
+####################
+# RPi1
+#
+[ ! -n "$ARM64" ] && echo ""
+[ ! -n "$ARM64" ] && echo "*** RPi1 [ARMv6, arm1176jzf-s]"
+#### -mcpu=arm1176jzf-s, ARMv6, Thumb v3, no rbit at all, no movw:
+#[ ! -n "$ARM64" ] && exec $ARM $OPTS32 -march=armv6 -mcpu=arm1176jzf-s -mfpu=vfp bitscan.c -Wa,-aln=bitscan-armv6.lst -Wl,--fix-arm1176 -o bitscan-armv6
+[ ! -n "$ARM64" ] && exec $ARM $OPTS32 -mcpu=arm1176jzf-s -mfpu=vfp bitscan.c -Wa,-aln=bitscan-arm1176jzf-s.lst -Wl,--fix-arm1176 -o bitscan-arm1176jzf-s
+
+####################
+# ARMv6
+#
+echo ""
+echo "*** ARMv6T2"
+#### -mcpu=arm1156t2-s, ARMv6, Thumb v4 (Thumb-2) and rbit is present (in Thumb mode), movw too?:
+exec $ARM $OPTS32 -mcpu=arm1156t2-s -mfpu=vfp bitscan.c -Wa,-aln=bitscan-arm1156t2-s.lst -o bitscan-arm1156t2-s
+#### -march=armv6t2 (WRONG -mcpu!), ARMv6, Thumb v4 (Thumb-2) and rbit is present (in Thumb mode), no movw:
+#exec $ARM $OPTS32 -march=armv6t2 -mcpu=arm1176jzf-s -mfpu=vfp bitscan.c -Wa,-aln=bitscan-armv6t2.lst -Wl,--fix-arm1176 -o bitscan-armv6t2
+#### -mcpu=arm1136j-s, ARMv6, Thumb v3, no rbit at all, no movw:
+[ ! -n "$ARM64" ] && exec $ARM $OPTS32 -mcpu=arm1136j-s -mfpu=vfp bitscan.c -Wa,-aln=bitscan-arm1136j-s.lst -o bitscan-arm1136j-s
+
+####################
+# ARMv7
+#
+echo ""
+echo "*** ARMv7"
+#### -march=armv7, ARMv7, Thumb v4 and rbit is present, movw is also here:
+exec $ARM $OPTS32 -march=armv7 -mfpu=vfp bitscan.c -Wa,-aln=bitscan-armv7.lst -o bitscan-armv7
+
+[ $? -eq 0 ] && echo "*** All Ok! ***"

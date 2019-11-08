@@ -1,0 +1,248 @@
+# mark_description "Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) MIC Architecture, Version 16.0.4.246 Be";
+# mark_description "ta Build 20160811";
+# mark_description "-qno-offload -O3 -m64 -mmic -nologo -masm=intel -w3 -wd1786 -std=c99 -DINTEL_SYNTAX -obitscan.mic -Fabitscan";
+# mark_description "-mic.lst";
+	.intel_syntax noprefix
+	.file "bitscan.c"
+	.text
+..TXTST0:
+# -- Begin  main
+	.text
+# mark_begin;
+# Threads 4
+        .align    16,0x90
+	.globl main
+# --- main(void)
+main:
+..B1.1:                         # Preds ..B1.0 Latency 13
+	.cfi_startproc
+..___tag_value_main.1:
+..L2:
+                                                          #38.1
+        push      rbp                                           #38.1
+	.cfi_def_cfa_offset 16
+        mov       rbp, rsp                                      #38.1
+	.cfi_def_cfa 6, 16
+	.cfi_offset 6, -16
+        and       rsp, -128                                     #38.1
+        push      r13                                           #38.1 c1
+        push      rbx                                           #38.1 c5
+        sub       rsp, 112                                      #38.1 c5
+        xor       esi, esi                                      #38.1 c9
+        mov       edi, 3                                        #38.1 c9
+        call      __intel_new_feature_proc_init                 #38.1 c13
+	.cfi_escape 0x10, 0x03, 0x0e, 0x38, 0x1c, 0x0d, 0x80, 0xff, 0xff, 0xff, 0x1a, 0x0d, 0xf0, 0xff, 0xff, 0xff, 0x22
+	.cfi_escape 0x10, 0x0d, 0x0e, 0x38, 0x1c, 0x0d, 0x80, 0xff, 0xff, 0xff, 0x1a, 0x0d, 0xf8, 0xff, 0xff, 0xff, 0x22
+                                # LOE r12 r14 r15
+..B1.11:                        # Preds ..B1.1 Latency 15
+        stmxcsr   DWORD PTR [rsp]                               #38.1 c1
+        mov       edi, offset flat: .L_2__STRING.0              #43.2 c2
+        mov       esi, offset flat: .L_2__STRING.1              #43.2 c2
+        or        DWORD PTR [rsp], 32832                        #38.1 c6
+        mov       edx, 64                                       #43.2 c6
+        ldmxcsr   DWORD PTR [rsp]                               #38.1 c10
+        xor       eax, eax                                      #43.2 c11
+..___tag_value_main.8:
+#       printf(const char *__restrict__, ...)
+        call      printf                                        #43.2
+..___tag_value_main.9:
+                                # LOE r12 r14 r15
+..B1.2:                         # Preds ..B1.11 Latency 5
+        mov       rsi, QWORD PTR stdout[rip]                    #57.2 c1
+        mov       edi, offset flat: .L_2__STRING.2              #57.2 c1
+#       fputs(const char *__restrict__, FILE *__restrict__)
+        call      fputs                                         #57.2 c5
+                                # LOE r12 r14 r15
+..B1.3:                         # Preds ..B1.2 Latency 9
+        mov       edi, offset flat: .L_2__STRING.3              #58.2 c1
+        lea       rsi, QWORD PTR [rsp]                          #58.2 c1
+        xor       eax, eax                                      #58.2 c5
+#       scanf(const char *__restrict__, ...)
+        call      __isoc99_scanf                                #58.2 c9
+                                # LOE r12 r14 r15
+..B1.4:                         # Preds ..B1.3 Latency 17
+        mov       rbx, QWORD PTR [rsp]                          #60.7 c1
+        mov       edi, offset flat: .L_2__STRING.4              #61.2 c1
+        mov       r13d, ebx                                     #60.7 c5
+# Begin ASM
+        bsf	edx,r13d
+	setnz	cl
+# End ASM                                                       #60.7 c9
+        mov       rsi, rbx                                      #61.2 c9
+        movzx     ecx, cl                                       #60.7 c13
+        xor       eax, eax                                      #61.2 c13
+..___tag_value_main.10:
+#       printf(const char *__restrict__, ...)
+        call      printf                                        #61.2
+..___tag_value_main.11:
+                                # LOE rbx r12 r14 r15 r13d
+..B1.5:                         # Preds ..B1.4 Latency 13
+# Begin ASM
+        bsr	edx,r13d
+	setnz	cl
+# End ASM                                                       #62.7 c1
+        mov       edi, offset flat: .L_2__STRING.5              #63.2 c1
+        movzx     ecx, cl                                       #62.7 c5
+        mov       rsi, rbx                                      #63.2 c5
+        xor       eax, eax                                      #63.2 c9
+..___tag_value_main.12:
+#       printf(const char *__restrict__, ...)
+        call      printf                                        #63.2
+..___tag_value_main.13:
+                                # LOE rbx r12 r14 r15
+..B1.6:                         # Preds ..B1.5 Latency 13
+# Begin ASM
+        bsfq	rdx,rbx
+	setnz	cl
+# End ASM                                                       #66.7 c1
+        mov       edi, offset flat: .L_2__STRING.6              #67.2 c1
+        movzx     ecx, cl                                       #66.7 c5
+        mov       rsi, rbx                                      #67.2 c5
+        xor       eax, eax                                      #67.2 c9
+..___tag_value_main.14:
+#       printf(const char *__restrict__, ...)
+        call      printf                                        #67.2
+..___tag_value_main.15:
+                                # LOE rbx r12 r14 r15
+..B1.7:                         # Preds ..B1.6 Latency 13
+# Begin ASM
+        bsrq	rdx,rbx
+	setnz	cl
+# End ASM                                                       #68.7 c1
+        mov       edi, offset flat: .L_2__STRING.7              #69.2 c1
+        movzx     ecx, cl                                       #68.7 c5
+        mov       rsi, rbx                                      #69.2 c5
+        xor       eax, eax                                      #69.2 c9
+..___tag_value_main.16:
+#       printf(const char *__restrict__, ...)
+        call      printf                                        #69.2
+..___tag_value_main.17:
+                                # LOE r12 r14 r15
+..B1.8:                         # Preds ..B1.7 Latency 13
+        xor       eax, eax                                      #72.9 c1
+        add       rsp, 112                                      #72.9 c1
+	.cfi_restore 3
+        pop       rbx                                           #72.9
+	.cfi_restore 13
+        pop       r13                                           #72.9
+        mov       rsp, rbp                                      #72.9 c13
+        pop       rbp                                           #72.9
+	.cfi_def_cfa 7, 8
+	.cfi_restore 6
+        ret                                                     #72.9
+        .align    16,0x90
+                                # LOE
+	.cfi_endproc
+# mark_end;
+	.type	main,@function
+	.size	main,.-main
+	.data
+# -- End  main
+	.section .rodata.str1.4, "aMS",@progbits,1
+	.align 4
+.L_2__STRING.0:
+	.long	825042186
+	.long	975205170
+	.long	175449376
+	.byte	0
+	.type	.L_2__STRING.0,@object
+	.size	.L_2__STRING.0,13
+	.space 3, 0x00 	# pad
+	.align 4
+.L_2__STRING.1:
+	.long	1146244951
+	.long	1163544915
+	.byte	0
+	.type	.L_2__STRING.1,@object
+	.size	.L_2__STRING.1,9
+	.space 3, 0x00 	# pad
+	.align 4
+.L_2__STRING.2:
+	.long	1886275850
+	.long	1965061237
+	.long	1734964078
+	.long	543450478
+	.long	1702129257
+	.long	1047684455
+	.word	32
+	.type	.L_2__STRING.2,@object
+	.size	.L_2__STRING.2,26
+	.space 2, 0x00 	# pad
+	.align 4
+.L_2__STRING.3:
+	.long	1970039845
+	.byte	0
+	.type	.L_2__STRING.3,@object
+	.size	.L_2__STRING.3,5
+	.space 3, 0x00 	# pad
+	.align 4
+.L_2__STRING.4:
+	.long	1765957386
+	.long	1633899380
+	.long	1919895150
+	.long	1685217655
+	.long	1814372392
+	.long	975773813
+	.long	544548128
+	.long	1668633384
+	.long	1936942435
+	.long	695543101
+	.word	10
+	.type	.L_2__STRING.4,@object
+	.size	.L_2__STRING.4,42
+	.space 2, 0x00 	# pad
+	.align 4
+.L_2__STRING.5:
+	.long	1953055327
+	.long	1851876179
+	.long	1702258002
+	.long	677737330
+	.long	1970021664
+	.long	540682528
+	.long	673215781
+	.long	1667462483
+	.long	1030976357
+	.long	170489125
+	.byte	0
+	.type	.L_2__STRING.5,@object
+	.size	.L_2__STRING.5,41
+	.space 3, 0x00 	# pad
+	.align 4
+.L_2__STRING.6:
+	.long	1765957386
+	.long	1633899380
+	.long	1919895150
+	.long	1685217655
+	.long	539505718
+	.long	1970039845
+	.long	540682528
+	.long	673215781
+	.long	1667462483
+	.long	1030976357
+	.long	170489125
+	.byte	0
+	.type	.L_2__STRING.6,@object
+	.size	.L_2__STRING.6,45
+	.space 3, 0x00 	# pad
+	.align 4
+.L_2__STRING.7:
+	.long	1953055327
+	.long	1851876179
+	.long	1702258002
+	.long	912618354
+	.long	622864436
+	.long	544566380
+	.long	622869033
+	.long	1395138677
+	.long	1701012341
+	.long	624784243
+	.long	665973
+	.type	.L_2__STRING.7,@object
+	.size	.L_2__STRING.7,44
+	.data
+	.section .note.GNU-stack, ""
+// -- Begin DWARF2 SEGMENT .eh_frame
+	.section .eh_frame,"a",@progbits
+.eh_frame_seg:
+	.align 8
+# End

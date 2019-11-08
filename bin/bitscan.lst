@@ -1,0 +1,590 @@
+; mark_description "Intel(R) C++ Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 16.0.4.246 Build 20160811";
+; mark_description "";
+; mark_description "-O3 -Ot -Qm64 -QxHost -nologo -W3 -wd1786 -Qstd=c99 -Fabitscan.lst -FAcs";
+	OPTION DOTNAME
+_TEXT	SEGMENT      'CODE'
+;	COMDAT main
+TXTST0:
+; -- Begin  main
+;main	ENDS
+_TEXT	ENDS
+_TEXT	SEGMENT      'CODE'
+;	COMDAT main
+; mark_begin;
+       ALIGN     16
+	PUBLIC main
+; --- main(void)
+main	PROC 
+.B1.1::                         ; Preds .B1.0
+
+;;; {
+
+L1::
+                                                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  00000 41 57            push r15                               ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  00002 48 83 ec 30      sub rsp, 48                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  00006 ba fe 03 00 00   mov edx, 1022                          ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  0000b b9 03 00 00 00   mov ecx, 3                             ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  00010 e8 fc ff ff ff   call __intel_new_feature_proc_init     ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.12::                        ; Preds .B1.1
+  00015 0f ae 5c 24 20   stmxcsr DWORD PTR [32+rsp]             ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+
+;;; 	unsigned long long input;
+;;; 	unsigned result;
+;;; 	unsigned zf;
+;;; 
+;;; 	printf( "\n%-12s : %u\n", "WORDSIZE", ( unsigned )__WORDSIZE );
+
+  0001a 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0N@A@?6?$CF?912s?5?3?5?$CFu?6?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:43.2
+  00021 48 8d 15 00 00 
+        00 00            lea rdx, QWORD PTR [??_C@_08A@WORDSIZE?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:43.2
+  00028 81 4c 24 20 40 
+        80 00 00         or DWORD PTR [32+rsp], 32832           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  00030 41 b8 40 00 00 
+        00               mov r8d, 64                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:43.2
+  00036 0f ae 54 24 20   ldmxcsr DWORD PTR [32+rsp]             ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:38.1
+  0003b e8 fc ff ff ff  ;       printf(const char *const, ...)
+        call      printf                                        ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:43.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.2::                         ; Preds .B1.12
+
+;;; #ifdef _IS_ARM
+;;; 	printf( "%-12s : %u\n", "_IS_ARM", ( unsigned )_IS_ARM );
+;;; #endif
+;;; #ifdef _IS_THUMB
+;;; 	printf( "%-12s : %u\n", "_IS_THUMB", ( unsigned )_IS_THUMB );
+;;; #endif
+;;; #ifdef _IS_IN_THUMB
+;;; 	printf( "%-12s : %u\n", "_IS_IN_THUMB", ( unsigned )_IS_IN_THUMB );
+;;; #endif
+;;; #ifdef _IS_ARM64
+;;; 	printf( "%-12s : %u\n", "_IS_ARM64", ( unsigned )_IS_ARM64 );
+;;; #endif
+;;; 
+;;; 	fputs( "\nInput unsigned integer> ", stdout );
+
+  00040 b9 01 00 00 00   mov ecx, 1                             ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:57.39
+  00045 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+        call      __acrt_iob_func                               ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:57.39
+                                ; LOE rax rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.3::                         ; Preds .B1.2
+  0004a 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:57.2
+  00051 48 89 c2         mov rdx, rax                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:57.2
+  00054 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
+        call      fputs                                         ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:57.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.4::                         ; Preds .B1.3
+
+;;; 	scanf( "%llu", &input );
+
+  00059 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_04A@?$CFllu?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:58.2
+  00060 48 8d 54 24 20   lea rdx, QWORD PTR [32+rsp]            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:58.2
+  00065 e8 fc ff ff ff  ;       scanf(const char *const, ...)
+        call      scanf                                         ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:58.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.5::                         ; Preds .B1.4
+
+;;; 
+;;; 	zf = _BSF32( &result, ( unsigned long )input );
+
+  0006a 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:60.7
+  0006e 41 bf 01 00 00 
+        00               mov r15d, 1                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:60.7
+  00074 45 33 c9         xor r9d, r9d                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:60.7
+  00077 44 0f bc c2      bsf r8d, edx                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:60.7
+
+;;; 	printf( "\n_BitScanForward( %lu ): %u (Success=%u)\n", ( unsigned long )input, result, zf );
+
+  0007b 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0CK@A@?6_BitScanForward?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:61.2
+  00082 45 0f 45 cf      cmovne r9d, r15d                       ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:60.7
+  00086 e8 fc ff ff ff  ;       printf(const char *const, ...)
+        call      printf                                        ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:61.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 r15d xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.6::                         ; Preds .B1.5
+
+;;; 	zf = _BSR32( &result, ( unsigned long )input );
+
+  0008b 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:62.7
+  0008f 45 33 c9         xor r9d, r9d                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:62.7
+  00092 44 0f bd c2      bsr r8d, edx                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:62.7
+
+;;; 	printf( "_BitScanReverse( %lu ): %u (Success=%u)\n", ( unsigned long )input, result, zf );
+
+  00096 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0CJ@A@_BitScanReverse?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:63.2
+  0009d 45 0f 45 cf      cmovne r9d, r15d                       ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:62.7
+  000a1 e8 fc ff ff ff  ;       printf(const char *const, ...)
+        call      printf                                        ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:63.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 r15d xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.7::                         ; Preds .B1.6
+
+;;; 
+;;; #if __WORDSIZE > 32
+;;; 	zf = _BSF64( &result, input );
+
+  000a6 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:66.7
+  000ab 45 33 c9         xor r9d, r9d                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:66.7
+  000ae 4c 0f bc c2      bsf r8, rdx                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:66.7
+
+;;; 	printf( "\n_BitScanForward64( %llu ): %u (Success=%u)\n", input, result, zf );
+
+  000b2 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0CN@A@?6_BitScanForward64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:67.2
+  000b9 45 0f 45 cf      cmovne r9d, r15d                       ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:66.7
+  000bd e8 fc ff ff ff  ;       printf(const char *const, ...)
+        call      printf                                        ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:67.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 r15d xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.8::                         ; Preds .B1.7
+
+;;; 	zf = _BSR64( &result, input );
+
+  000c2 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:68.7
+  000c7 45 33 c9         xor r9d, r9d                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:68.7
+  000ca 4c 0f bd c2      bsr r8, rdx                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:68.7
+
+;;; 	printf( "_BitScanReverse64( %llu ): %u (Success=%u)\n", input, result, zf );
+
+  000ce 48 8d 0d 00 00 
+        00 00            lea rcx, QWORD PTR [??_C@_0CM@A@_BitScanReverse64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:69.2
+  000d5 45 0f 45 cf      cmovne r9d, r15d                       ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:68.7
+  000d9 e8 fc ff ff ff  ;       printf(const char *const, ...)
+        call      printf                                        ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:69.2
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B1.9::                         ; Preds .B1.8
+
+;;; #endif
+;;; 
+;;; 	return EXIT_SUCCESS;
+
+  000de 33 c0            xor eax, eax                           ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:72.9
+  000e0 48 83 c4 30      add rsp, 48                            ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:72.9
+  000e4 41 5f            pop r15                                ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:72.9
+  000e6 c3               ret                                    ;S:\WORK\klpmd.mic\-bitscan\bitscan.c:72.9
+  000e7 66 0f 1f 84 00 
+        00 00 00 00      ALIGN     16
+                                ; LOE
+.B1.10::
+; mark_end;
+main ENDP
+;main	ENDS
+_TEXT	ENDS
+.xdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .xdata$main
+	ALIGN 004H
+.unwind.main.B1_B9	DD	132609
+	DD	4026683910
+;.xdata$main	ENDS
+.xdata	ENDS
+.pdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .pdata$main
+	ALIGN 004H
+.pdata.main.B1_B9	DD	imagerel .B1.1
+	DD	imagerel .B1.10
+	DD	imagerel .unwind.main.B1_B9
+;.pdata$main	ENDS
+.pdata	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+; -- End  main
+_TEXT	SEGMENT      'CODE'
+;	COMDAT printf
+TXTST1:
+; -- Begin  printf
+;printf	ENDS
+_TEXT	ENDS
+_TEXT	SEGMENT      'CODE'
+;	COMDAT printf
+; mark_begin;
+       ALIGN     16
+	PUBLIC printf
+; --- printf(const char *const, ...)
+printf	PROC 
+; parameter 1: rcx
+.B2.1::                         ; Preds .B2.0
+
+;;;     {
+
+L2::
+                                                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  00000 41 57            push r15                               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  00002 48 83 ec 40      sub rsp, 64                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  00006 48 89 4c 24 50   mov QWORD PTR [80+rsp], rcx            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+
+;;;         int _Result;
+;;;         va_list _ArgList;
+;;;         __crt_va_start(_ArgList, _Format);
+
+  0000b 48 8d 44 24 58   lea rax, QWORD PTR [88+rsp]            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:952.9
+  00010 48 89 10         mov QWORD PTR [rax], rdx               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  00013 4c 89 40 08      mov QWORD PTR [8+rax], r8              ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  00017 4c 89 48 10      mov QWORD PTR [16+rax], r9             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:949.5
+  0001b 48 89 44 24 30   mov QWORD PTR [48+rsp], rax            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:952.9
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B2.2::                         ; Preds .B2.1
+
+;;;         _Result = _vfprintf_l(stdout, _Format, NULL, _ArgList);
+
+  00020 b9 01 00 00 00   mov ecx, 1                             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.31
+  00025 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+        call      __acrt_iob_func                               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.31
+                                ; LOE rax rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B2.7::                         ; Preds .B2.2
+  0002a 49 89 c7         mov r15, rax                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.31
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B2.3::                         ; Preds .B2.7
+  0002d e8 fc ff ff ff  ;       __local_stdio_printf_options(void)
+        call      __local_stdio_printf_options                  ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+                                ; LOE rax rbx rbp rsi rdi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B2.9::                         ; Preds .B2.3
+  00032 49 89 e1         mov r9, rsp                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  00035 49 89 c2         mov r10, rax                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  00038 48 8b 44 24 30   mov rax, QWORD PTR [48+rsp]            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  0003d 4c 89 fa         mov rdx, r15                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  00040 4c 8b 44 24 50   mov r8, QWORD PTR [80+rsp]             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  00045 49 89 41 20      mov QWORD PTR [32+r9], rax             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  00049 45 33 c9         xor r9d, r9d                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  0004c 49 8b 0a         mov rcx, QWORD PTR [r10]               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+  0004f e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+        call      __stdio_common_vfprintf                       ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:953.19
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 eax xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B2.4::                         ; Preds .B2.9
+
+;;;         __crt_va_end(_ArgList);
+
+  00054 48 c7 44 24 30 
+        00 00 00 00      mov QWORD PTR [48+rsp], 0              ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:954.9
+
+;;;         return _Result;
+
+  0005d 48 83 c4 40      add rsp, 64                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:955.16
+  00061 41 5f            pop r15                                ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:955.16
+  00063 c3               ret                                    ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:955.16
+  00064 0f 1f 44 00 00 
+        0f 1f 80 00 00 
+        00 00            ALIGN     16
+                                ; LOE
+.B2.5::
+; mark_end;
+printf ENDP
+;printf	ENDS
+_TEXT	ENDS
+.xdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .xdata$printf
+	ALIGN 004H
+.unwind.printf.B1_B4	DD	132609
+	DD	4026692102
+;.xdata$printf	ENDS
+.xdata	ENDS
+.pdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .pdata$printf
+	ALIGN 004H
+.pdata.printf.B1_B4	DD	imagerel .B2.1
+	DD	imagerel .B2.5
+	DD	imagerel .unwind.printf.B1_B4
+;.pdata$printf	ENDS
+.pdata	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+; -- End  printf
+_TEXT	SEGMENT      'CODE'
+;	COMDAT __local_stdio_printf_options
+TXTST2:
+; -- Begin  __local_stdio_printf_options
+;__local_stdio_printf_options	ENDS
+_TEXT	ENDS
+_TEXT	SEGMENT      'CODE'
+;	COMDAT __local_stdio_printf_options
+; mark_begin;
+       ALIGN     16
+	PUBLIC __local_stdio_printf_options
+; --- __local_stdio_printf_options(void)
+__local_stdio_printf_options	PROC 
+.B3.1::                         ; Preds .B3.0
+
+;;;     {
+
+L3::
+                                                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:85.5
+
+;;;         static unsigned __int64 _OptionsStorage;
+;;;         return &_OptionsStorage;
+
+  00000 48 8d 05 00 00 
+        00 00            lea rax, QWORD PTR [_OptionsStorage.308.0.5] ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:87.17
+  00007 c3               ret                                    ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:87.17
+  00008 0f 1f 84 00 00 
+        00 00 00         ALIGN     16
+                                ; LOE
+.B3.2::
+; mark_end;
+__local_stdio_printf_options ENDP
+;__local_stdio_printf_options	ENDS
+_TEXT	ENDS
+_BSS	SEGMENT      'BSS'
+_OptionsStorage.308.0.5	DD 2 DUP (?)	; pad
+_BSS	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+; -- End  __local_stdio_printf_options
+_TEXT	SEGMENT      'CODE'
+;	COMDAT scanf
+TXTST3:
+; -- Begin  scanf
+;scanf	ENDS
+_TEXT	ENDS
+_TEXT	SEGMENT      'CODE'
+;	COMDAT scanf
+; mark_begin;
+       ALIGN     16
+	PUBLIC scanf
+; --- scanf(const char *const, ...)
+scanf	PROC 
+; parameter 1: rcx
+.B4.1::                         ; Preds .B4.0
+
+;;;     {
+
+L4::
+                                                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  00000 41 57            push r15                               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  00002 48 83 ec 40      sub rsp, 64                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  00006 48 8d 05 00 00 
+        00 00            lea rax, QWORD PTR [??_C@_04A@?$CFllu?$AA@] ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  0000d 48 89 54 24 58   mov QWORD PTR [88+rsp], rdx            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+
+;;;         int _Result;
+;;;         va_list _ArgList;
+;;;         __crt_va_start(_ArgList, _Format);
+
+  00012 4c 8d 54 24 58   lea r10, QWORD PTR [88+rsp]            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1278.9
+  00017 4d 89 42 08      mov QWORD PTR [8+r10], r8              ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  0001b 4d 89 4a 10      mov QWORD PTR [16+r10], r9             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1275.5
+  0001f 49 89 42 f8      mov QWORD PTR [-8+r10], rax            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1269.37
+  00023 4c 89 54 24 30   mov QWORD PTR [48+rsp], r10            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1278.9
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B4.2::                         ; Preds .B4.1
+
+;;;         _Result = _vfscanf_l(stdin, _Format, NULL, _ArgList);
+
+  00028 33 c9            xor ecx, ecx                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.30
+  0002a e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+        call      __acrt_iob_func                               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.30
+                                ; LOE rax rbx rbp rsi rdi r12 r13 r14 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B4.7::                         ; Preds .B4.2
+  0002f 49 89 c7         mov r15, rax                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.30
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B4.3::                         ; Preds .B4.7
+  00032 e8 fc ff ff ff  ;       __local_stdio_scanf_options(void)
+        call      __local_stdio_scanf_options                   ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+                                ; LOE rax rbx rbp rsi rdi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B4.9::                         ; Preds .B4.3
+  00037 49 89 e1         mov r9, rsp                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  0003a 49 89 c2         mov r10, rax                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  0003d 48 8b 44 24 30   mov rax, QWORD PTR [48+rsp]            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  00042 4c 89 fa         mov rdx, r15                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  00045 4c 8b 44 24 50   mov r8, QWORD PTR [80+rsp]             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  0004a 49 89 41 20      mov QWORD PTR [32+r9], rax             ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  0004e 45 33 c9         xor r9d, r9d                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  00051 49 8b 0a         mov rcx, QWORD PTR [r10]               ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+  00054 e8 fc ff ff ff  ;       __stdio_common_vfscanf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+        call      __stdio_common_vfscanf                        ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1279.19
+                                ; LOE rbx rbp rsi rdi r12 r13 r14 eax xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
+.B4.4::                         ; Preds .B4.9
+
+;;;         __crt_va_end(_ArgList);
+
+  00059 48 c7 44 24 30 
+        00 00 00 00      mov QWORD PTR [48+rsp], 0              ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1280.9
+
+;;;         return _Result;
+
+  00062 48 83 c4 40      add rsp, 64                            ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1281.16
+  00066 41 5f            pop r15                                ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1281.16
+  00068 c3               ret                                    ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\stdio.h:1281.16
+  00069 0f 1f 80 00 00 
+        00 00            ALIGN     16
+                                ; LOE
+.B4.5::
+; mark_end;
+scanf ENDP
+;scanf	ENDS
+_TEXT	ENDS
+.xdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .xdata$scanf
+	ALIGN 004H
+.unwind.scanf.B1_B4	DD	132609
+	DD	4026692102
+;.xdata$scanf	ENDS
+.xdata	ENDS
+.pdata	SEGMENT  DWORD   READ  ''
+;	COMDAT .pdata$scanf
+	ALIGN 004H
+.pdata.scanf.B1_B4	DD	imagerel .B4.1
+	DD	imagerel .B4.5
+	DD	imagerel .unwind.scanf.B1_B4
+;.pdata$scanf	ENDS
+.pdata	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+; -- End  scanf
+_TEXT	SEGMENT      'CODE'
+;	COMDAT __local_stdio_scanf_options
+TXTST4:
+; -- Begin  __local_stdio_scanf_options
+;__local_stdio_scanf_options	ENDS
+_TEXT	ENDS
+_TEXT	SEGMENT      'CODE'
+;	COMDAT __local_stdio_scanf_options
+; mark_begin;
+       ALIGN     16
+	PUBLIC __local_stdio_scanf_options
+; --- __local_stdio_scanf_options(void)
+__local_stdio_scanf_options	PROC 
+.B5.1::                         ; Preds .B5.0
+
+;;;     {
+
+L5::
+                                                           ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:94.5
+
+;;;         static unsigned __int64 _OptionsStorage;
+;;;         return &_OptionsStorage;
+
+  00000 48 8d 05 08 00 
+        00 00            lea rax, QWORD PTR [_OptionsStorage.309.0.6] ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:96.17
+  00007 c3               ret                                    ;C:\Program Files (x86)\Windows Kits\10\include\10.0.14393.0\ucrt\corecrt_stdio_config.h:96.17
+  00008 0f 1f 84 00 00 
+        00 00 00         ALIGN     16
+                                ; LOE
+.B5.2::
+; mark_end;
+__local_stdio_scanf_options ENDP
+;__local_stdio_scanf_options	ENDS
+_TEXT	ENDS
+_BSS	SEGMENT      'BSS'
+_OptionsStorage.309.0.6	DD 2 DUP (?)	; pad
+_BSS	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+; -- End  __local_stdio_scanf_options
+;	COMDAT ??_C@_0N@A@?6?$CF?912s?5?3?5?$CFu?6?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0N@A@?6?$CF?912s?5?3?5?$CFu?6?$AA@
+??_C@_0N@A@?6?$CF?912s?5?3?5?$CFu?6?$AA@	DD	825042186
+	DD	975205170
+	DD	175449376
+	DB	0
+;??_C@_0N@A@?6?$CF?912s?5?3?5?$CFu?6?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_08A@WORDSIZE?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_08A@WORDSIZE?$AA@
+??_C@_08A@WORDSIZE?$AA@	DD	1146244951
+	DD	1163544915
+	DB	0
+;??_C@_08A@WORDSIZE?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@
+??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@	DD	1886275850
+	DD	1965061237
+	DD	1734964078
+	DD	543450478
+	DD	1702129257
+	DD	1047684455
+	DW	32
+;??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_04A@?$CFllu?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_04A@?$CFllu?$AA@
+??_C@_04A@?$CFllu?$AA@	DD	1970039845
+	DB	0
+;??_C@_04A@?$CFllu?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_0CK@A@?6_BitScanForward?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0CK@A@?6_BitScanForward?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+??_C@_0CK@A@?6_BitScanForward?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	DD	1765957386
+	DD	1633899380
+	DD	1919895150
+	DD	1685217655
+	DD	1814372392
+	DD	975773813
+	DD	544548128
+	DD	1668633384
+	DD	1936942435
+	DD	695543101
+	DW	10
+;??_C@_0CK@A@?6_BitScanForward?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_0CJ@A@_BitScanReverse?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0CJ@A@_BitScanReverse?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+??_C@_0CJ@A@_BitScanReverse?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	DD	1953055327
+	DD	1851876179
+	DD	1702258002
+	DD	677737330
+	DD	1970021664
+	DD	540682528
+	DD	673215781
+	DD	1667462483
+	DD	1030976357
+	DD	170489125
+	DB	0
+;??_C@_0CJ@A@_BitScanReverse?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_0CN@A@?6_BitScanForward64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0CN@A@?6_BitScanForward64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+??_C@_0CN@A@?6_BitScanForward64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	DD	1765957386
+	DD	1633899380
+	DD	1919895150
+	DD	1685217655
+	DD	539505718
+	DD	1970039845
+	DD	540682528
+	DD	673215781
+	DD	1667462483
+	DD	1030976357
+	DD	170489125
+	DB	0
+;??_C@_0CN@A@?6_BitScanForward64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	ENDS
+_RDATA	ENDS
+;	COMDAT ??_C@_0CM@A@_BitScanReverse64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+_RDATA	SEGMENT     READ  'DATA'
+;	COMDAT ??_C@_0CM@A@_BitScanReverse64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@
+??_C@_0CM@A@_BitScanReverse64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	DD	1953055327
+	DD	1851876179
+	DD	1702258002
+	DD	912618354
+	DD	622864436
+	DD	544566380
+	DD	622869033
+	DD	1395138677
+	DD	1701012341
+	DD	624784243
+	DD	665973
+;??_C@_0CM@A@_BitScanReverse64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@	ENDS
+_RDATA	ENDS
+_DATA	SEGMENT      'DATA'
+_DATA	ENDS
+EXTRN	__stdio_common_vfscanf:PROC
+EXTRN	__stdio_common_vfprintf:PROC
+EXTRN	fputs:PROC
+EXTRN	__acrt_iob_func:PROC
+EXTRN	__intel_new_feature_proc_init:PROC
+EXTRN	__ImageBase:PROC
+	INCLUDELIB <libmmt>
+	INCLUDELIB <LIBCMT>
+	INCLUDELIB <libirc>
+	INCLUDELIB <svml_dispmt>
+	INCLUDELIB <OLDNAMES>
+	INCLUDELIB <libdecimal>
+	END
