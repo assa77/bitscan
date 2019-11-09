@@ -52,146 +52,172 @@
   52 0090 00000090 		adrp	x0, .LC7
   53 0094 00000091 		add	x0, x0, :lo12:.LC7
   54 0098 00000094 		bl	__isoc99_scanf
-  55 009c E11740F9 		ldr	x1, [sp, 40]
-  56 00a0 E303132A 		mov	w3, w19
-  57 00a4 00000090 		adrp	x0, .LC8
-  58 00a8 00000091 		add	x0, x0, :lo12:.LC8
-  59              	#APP
-  60              	// 451 "bitscan.h" 1
-  61 00ac 2200C05A 		rbit	w2,w1
-  62 00b0 4210C05A 		clz	w2,w2
-  63 00b4 6314424B 		sub	w3,w3,w2,lsr #5
-  64              	// 0 "" 2
-  65              	#NO_APP
-  66 00b8 631C0012 		and	w3, w3, 255
-  67 00bc 00000094 		bl	printf
-  68 00c0 E11740F9 		ldr	x1, [sp, 40]
-  69 00c4 E303132A 		mov	w3, w19
-  70 00c8 E2038052 		mov	w2, 31
-  71 00cc 00000090 		adrp	x0, .LC9
-  72 00d0 00000091 		add	x0, x0, :lo12:.LC9
-  73 00d4 E403012A 		mov	w4, w1
-  74              	#APP
-  75              	// 483 "bitscan.h" 1
-  76 00d8 8410C05A 		clz	w4,w4
-  77 00dc 4200044B 		sub	w2,w2,w4
-  78 00e0 6314444B 		sub	w3,w3,w4,lsr #5
-  79              	// 0 "" 2
-  80              	#NO_APP
-  81 00e4 631C0012 		and	w3, w3, 255
-  82 00e8 00000094 		bl	printf
-  83 00ec E11740F9 		ldr	x1, [sp, 40]
-  84 00f0 E303132A 		mov	w3, w19
-  85 00f4 00000090 		adrp	x0, .LC10
-  86 00f8 00000091 		add	x0, x0, :lo12:.LC10
-  87              	#APP
-  88              	// 467 "bitscan.h" 1
-  89 00fc 2200C0DA 		rbit	x2,x1
-  90 0100 4210C0DA 		clz	x2,x2
-  91 0104 631842CB 		sub	x3,x3,x2,lsr #6
-  92              	// 0 "" 2
-  93              	#NO_APP
-  94 0108 631C0012 		and	w3, w3, 255
-  95 010c 00000094 		bl	printf
-  96 0110 E41740F9 		ldr	x4, [sp, 40]
-  97 0114 E2078052 		mov	w2, 63
-  98 0118 00000090 		adrp	x0, .LC11
-  99 011c 00000091 		add	x0, x0, :lo12:.LC11
- 100 0120 E10304AA 		mov	x1, x4
- 101              	#APP
- 102              	// 499 "bitscan.h" 1
- 103 0124 8410C0DA 		clz	x4,x4
- 104 0128 420004CB 		sub	x2,x2,x4
- 105 012c 731A44CB 		sub	x19,x19,x4,lsr #6
- 106              	// 0 "" 2
- 107              	#NO_APP
- 108 0130 631E0012 		and	w3, w19, 255
- 109 0134 00000094 		bl	printf
- 110 0138 00008052 		mov	w0, 0
- 111 013c F30B40F9 		ldr	x19, [sp, 16]
- 112 0140 FD7BC3A8 		ldp	x29, x30, [sp], 48
- 113              		.cfi_restore 30
- 114              		.cfi_restore 29
- 115              		.cfi_restore 19
- 116              		.cfi_def_cfa_offset 0
- 117 0144 C0035FD6 		ret
- 118              		.cfi_endproc
- 119              	.LFE26:
- 120              		.size	main, .-main
- 121              		.section	.rodata.str1.8,"aMS",@progbits,1
- 122              		.align	3
- 123              	.LC0:
- 124 0000 574F5244 		.string	"WORDSIZE"
- 124      53495A45 
- 124      00
- 125 0009 00000000 		.zero	7
- 125      000000
- 126              	.LC1:
- 127 0010 0A252D31 		.string	"\n%-12s : %u\n"
- 127      3273203A 
- 127      2025750A 
- 127      00
- 128 001d 000000   		.zero	3
- 129              	.LC2:
- 130 0020 5F49535F 		.string	"_IS_ARM"
- 130      41524D00 
- 131              	.LC3:
- 132 0028 252D3132 		.string	"%-12s : %u\n"
- 132      73203A20 
- 132      25750A00 
- 133 0034 00000000 		.zero	4
- 134              	.LC4:
- 135 0038 5F49535F 		.string	"_IS_THUMB"
- 135      5448554D 
- 135      4200
- 136 0042 00000000 		.zero	6
- 136      0000
- 137              	.LC5:
- 138 0048 5F49535F 		.string	"_IS_ARM64"
- 138      41524D36 
- 138      3400
- 139 0052 00000000 		.zero	6
- 139      0000
- 140              	.LC6:
- 141 0058 0A496E70 		.string	"\nInput unsigned integer> "
- 141      75742075 
- 141      6E736967 
- 141      6E656420 
- 141      696E7465 
- 142 0072 00000000 		.zero	6
- 142      0000
- 143              	.LC7:
- 144 0078 256C6C75 		.string	"%llu"
- 144      00
- 145 007d 000000   		.zero	3
- 146              	.LC8:
- 147 0080 0A5F4269 		.string	"\n_BitScanForward( %lu ): %u (Success=%u)\n"
- 147      74536361 
- 147      6E466F72 
- 147      77617264 
- 147      2820256C 
- 148 00aa 00000000 		.zero	6
- 148      0000
- 149              	.LC9:
- 150 00b0 5F426974 		.string	"_BitScanReverse( %lu ): %u (Success=%u)\n"
- 150      5363616E 
- 150      52657665 
- 150      72736528 
- 150      20256C75 
- 151 00d9 00000000 		.zero	7
- 151      000000
- 152              	.LC10:
- 153 00e0 0A5F4269 		.string	"\n_BitScanForward64( %llu ): %u (Success=%u)\n"
- 153      74536361 
- 153      6E466F72 
- 153      77617264 
- 153      36342820 
- 154 010d 000000   		.zero	3
- 155              	.LC11:
- 156 0110 5F426974 		.string	"_BitScanReverse64( %llu ): %u (Success=%u)\n"
- 156      5363616E 
- 156      52657665 
- 156      72736536 
- 156      34282025 
- 157              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
- 158              		.section	.note.GNU-stack,"",@progbits
+  55 009c E12B40B9 		ldr	w1, [sp, 40]
+  56 00a0 00000090 		adrp	x0, .LC8
+  57 00a4 00000091 		add	x0, x0, :lo12:.LC8
+  58 00a8 00000094 		bl	printf
+  59 00ac E11740F9 		ldr	x1, [sp, 40]
+  60 00b0 E303132A 		mov	w3, w19
+  61 00b4 00000090 		adrp	x0, .LC9
+  62 00b8 00000091 		add	x0, x0, :lo12:.LC9
+  63              	#APP
+  64              	// 457 "bitscan.h" 1
+  65 00bc 2200C05A 		rbit	w2,w1
+  66 00c0 4210C05A 		clz	w2,w2
+  67 00c4 6314424B 		sub	w3,w3,w2,lsr #5
+  68              	// 0 "" 2
+  69              	#NO_APP
+  70 00c8 E103012A 		uxtw	x1, w1
+  71 00cc 631C0012 		and	w3, w3, 255
+  72 00d0 00000094 		bl	printf
+  73 00d4 E11740F9 		ldr	x1, [sp, 40]
+  74 00d8 E303132A 		mov	w3, w19
+  75 00dc E2038052 		mov	w2, 31
+  76 00e0 00000090 		adrp	x0, .LC10
+  77 00e4 00000091 		add	x0, x0, :lo12:.LC10
+  78 00e8 E403012A 		mov	w4, w1
+  79 00ec E103012A 		uxtw	x1, w1
+  80              	#APP
+  81              	// 489 "bitscan.h" 1
+  82 00f0 8410C05A 		clz	w4,w4
+  83 00f4 4200044B 		sub	w2,w2,w4
+  84 00f8 6314444B 		sub	w3,w3,w4,lsr #5
+  85              	// 0 "" 2
+  86              	#NO_APP
+  87 00fc 631C0012 		and	w3, w3, 255
+  88 0100 00000094 		bl	printf
+  89 0104 E11740F9 		ldr	x1, [sp, 40]
+  90 0108 00000090 		adrp	x0, .LC11
+  91 010c 00000091 		add	x0, x0, :lo12:.LC11
+  92 0110 00000094 		bl	printf
+  93 0114 E11740F9 		ldr	x1, [sp, 40]
+  94 0118 E303132A 		mov	w3, w19
+  95 011c 00000090 		adrp	x0, .LC12
+  96 0120 00000091 		add	x0, x0, :lo12:.LC12
+  97              	#APP
+  98              	// 473 "bitscan.h" 1
+  99 0124 2200C0DA 		rbit	x2,x1
+ 100 0128 4210C0DA 		clz	x2,x2
+ 101 012c 631842CB 		sub	x3,x3,x2,lsr #6
+ 102              	// 0 "" 2
+ 103              	#NO_APP
+ 104 0130 631C0012 		and	w3, w3, 255
+ 105 0134 00000094 		bl	printf
+ 106 0138 E41740F9 		ldr	x4, [sp, 40]
+ 107 013c E2078052 		mov	w2, 63
+ 108 0140 00000090 		adrp	x0, .LC13
+ 109 0144 00000091 		add	x0, x0, :lo12:.LC13
+ 110 0148 E10304AA 		mov	x1, x4
+ 111              	#APP
+ 112              	// 505 "bitscan.h" 1
+ 113 014c 8410C0DA 		clz	x4,x4
+ 114 0150 420004CB 		sub	x2,x2,x4
+ 115 0154 731A44CB 		sub	x19,x19,x4,lsr #6
+ 116              	// 0 "" 2
+ 117              	#NO_APP
+ 118 0158 631E0012 		and	w3, w19, 255
+ 119 015c 00000094 		bl	printf
+ 120 0160 00008052 		mov	w0, 0
+ 121 0164 F30B40F9 		ldr	x19, [sp, 16]
+ 122 0168 FD7BC3A8 		ldp	x29, x30, [sp], 48
+ 123              		.cfi_restore 30
+ 124              		.cfi_restore 29
+ 125              		.cfi_restore 19
+ 126              		.cfi_def_cfa_offset 0
+ 127 016c C0035FD6 		ret
+ 128              		.cfi_endproc
+ 129              	.LFE26:
+ 130              		.size	main, .-main
+ 131              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 132              		.align	3
+ 133              	.LC0:
+ 134 0000 574F5244 		.string	"WORDSIZE"
+ 134      53495A45 
+ 134      00
+ 135 0009 00000000 		.zero	7
+ 135      000000
+ 136              	.LC1:
+ 137 0010 0A252D31 		.string	"\n%-12s : %u\n"
+ 137      3273203A 
+ 137      2025750A 
+ 137      00
+ 138 001d 000000   		.zero	3
+ 139              	.LC2:
+ 140 0020 5F49535F 		.string	"_IS_ARM"
+ 140      41524D00 
+ 141              	.LC3:
+ 142 0028 252D3132 		.string	"%-12s : %u\n"
+ 142      73203A20 
+ 142      25750A00 
+ 143 0034 00000000 		.zero	4
+ 144              	.LC4:
+ 145 0038 5F49535F 		.string	"_IS_THUMB"
+ 145      5448554D 
+ 145      4200
+ 146 0042 00000000 		.zero	6
+ 146      0000
+ 147              	.LC5:
+ 148 0048 5F49535F 		.string	"_IS_ARM64"
+ 148      41524D36 
+ 148      3400
+ 149 0052 00000000 		.zero	6
+ 149      0000
+ 150              	.LC6:
+ 151 0058 0A496E70 		.string	"\nInput unsigned integer> "
+ 151      75742075 
+ 151      6E736967 
+ 151      6E656420 
+ 151      696E7465 
+ 152 0072 00000000 		.zero	6
+ 152      0000
+ 153              	.LC7:
+ 154 0078 256C6C75 		.string	"%llu"
+ 154      00
+ 155 007d 000000   		.zero	3
+ 156              	.LC8:
+ 157 0080 0A33322D 		.string	"\n32-bit input value: %lu\n"
+ 157      62697420 
+ 157      696E7075 
+ 157      74207661 
+ 157      6C75653A 
+ 158 009a 00000000 		.zero	6
+ 158      0000
+ 159              	.LC9:
+ 160 00a0 5F426974 		.string	"_BitScanForward( %lu ): %u (Success=%u)\n"
+ 160      5363616E 
+ 160      466F7277 
+ 160      61726428 
+ 160      20256C75 
+ 161 00c9 00000000 		.zero	7
+ 161      000000
+ 162              	.LC10:
+ 163 00d0 5F426974 		.string	"_BitScanReverse( %lu ): %u (Success=%u)\n"
+ 163      5363616E 
+ 163      52657665 
+ 163      72736528 
+ 163      20256C75 
+ 164 00f9 00000000 		.zero	7
+ 164      000000
+ 165              	.LC11:
+ 166 0100 0A36342D 		.string	"\n64-bit input value: %llu\n"
+ 166      62697420 
+ 166      696E7075 
+ 166      74207661 
+ 166      6C75653A 
+ 167 011b 00000000 		.zero	5
+ 167      00
+ 168              	.LC12:
+ 169 0120 5F426974 		.string	"_BitScanForward64( %llu ): %u (Success=%u)\n"
+ 169      5363616E 
+ 169      466F7277 
+ 169      61726436 
+ 169      34282025 
+ 170 014c 00000000 		.zero	4
+ 171              	.LC13:
+ 172 0150 5F426974 		.string	"_BitScanReverse64( %llu ): %u (Success=%u)\n"
+ 172      5363616E 
+ 172      52657665 
+ 172      72736536 
+ 172      34282025 
+ 173              		.ident	"GCC: (Debian 8.3.0-6) 8.3.0"
+ 174              		.section	.note.GNU-stack,"",@progbits

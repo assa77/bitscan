@@ -25,20 +25,20 @@
   25              	main:
   26              		@ args = 0, pretend = 0, frame = 8
   27              		@ frame_needed = 0, uses_anonymous_args = 0
-  28 0000 2D49     		ldr	r1, .L4
+  28 0000 2F49     		ldr	r1, .L4
   29 0002 4FF02002 		mov	r2, #32
   30 0006 4DF80C4D 		str	r4, [sp, #-12]!
   31 000a 4FF00104 		mov	r4, #1
-  32 000e 2B48     		ldr	r0, .L4+4
+  32 000e 2D48     		ldr	r0, .L4+4
   33 0010 CDE9015E 		strd	r5, lr, [sp, #4]
   34 0014 83B0     		sub	sp, sp, #12
-  35 0016 2A4D     		ldr	r5, .L4+8
+  35 0016 2C4D     		ldr	r5, .L4+8
   36              	.LPIC0:
   37 0018 7944     		add	r1, pc
   38              	.LPIC1:
   39 001a 7844     		add	r0, pc
   40 001c FFF7FEFF 		bl	printf(PLT)
-  41 0020 2849     		ldr	r1, .L4+12
+  41 0020 2A49     		ldr	r1, .L4+12
   42              	.LPIC3:
   43 0022 7D44     		add	r5, pc
   44 0024 4FF00802 		mov	r2, #8
@@ -46,23 +46,23 @@
   46              	.LPIC2:
   47 002a 7944     		add	r1, pc
   48 002c FFF7FEFF 		bl	printf(PLT)
-  49 0030 2549     		ldr	r1, .L4+16
+  49 0030 2749     		ldr	r1, .L4+16
   50 0032 2846     		mov	r0, r5
   51 0034 4FF00802 		mov	r2, #8
   52              	.LPIC4:
   53 0038 7944     		add	r1, pc
   54 003a FFF7FEFF 		bl	printf(PLT)
-  55 003e 2349     		ldr	r1, .L4+20
+  55 003e 2549     		ldr	r1, .L4+20
   56 0040 2246     		mov	r2, r4
   57 0042 2846     		mov	r0, r5
-  58 0044 224D     		ldr	r5, .L4+24
+  58 0044 244D     		ldr	r5, .L4+24
   59              	.LPIC6:
   60 0046 7944     		add	r1, pc
   61 0048 FFF7FEFF 		bl	printf(PLT)
-  62 004c 214B     		ldr	r3, .L4+28
+  62 004c 234B     		ldr	r3, .L4+28
   63 004e 4FF01902 		mov	r2, #25
   64 0052 2146     		mov	r1, r4
-  65 0054 2048     		ldr	r0, .L4+32
+  65 0054 2248     		ldr	r0, .L4+32
   66              	.LPIC8:
   67 0056 7B44     		add	r3, pc
   68 0058 5B59     		ldr	r3, [r3, r5]
@@ -70,119 +70,132 @@
   70 005a 7844     		add	r0, pc
   71 005c 1B68     		ldr	r3, [r3]
   72 005e FFF7FEFF 		bl	fwrite(PLT)
-  73 0062 1E48     		ldr	r0, .L4+36
+  73 0062 2048     		ldr	r0, .L4+36
   74 0064 6946     		mov	r1, sp
   75              	.LPIC10:
   76 0066 7844     		add	r0, pc
   77 0068 FFF7FEFF 		bl	__isoc99_scanf(PLT)
-  78 006c 1C48     		ldr	r0, .L4+40
-  79 006e 2346     		mov	r3, r4
-  80 0070 0099     		ldr	r1, [sp]
-  81              		.syntax unified
-  82              	@ 551 "bitscan.h" 1
-  83 0072 91FAA1F2 		rbit	r2,r1
-  84 0076 B2FA82F2 		clz	r2,r2
-  85 007a A3EB5213 		sub	r3,r3,r2,lsr #5
-  86              	@ 0 "" 2
-  87              		.thumb
-  88              		.syntax unified
-  89 007e DBB2     		uxtb	r3, r3
-  90              	.LPIC11:
-  91 0080 7844     		add	r0, pc
-  92 0082 FFF7FEFF 		bl	printf(PLT)
-  93 0086 1748     		ldr	r0, .L4+44
-  94 0088 2346     		mov	r3, r4
-  95 008a 4FF01F02 		mov	r2, #31
-  96 008e 0099     		ldr	r1, [sp]
-  97              	.LPIC12:
-  98 0090 7844     		add	r0, pc
-  99 0092 0C46     		mov	r4, r1
- 100              		.syntax unified
- 101              	@ 588 "bitscan.h" 1
- 102 0094 B4FA84F4 		clz	r4,r4
- 103 0098 A2EB0402 		sub	r2,r2,r4
- 104 009c A3EB5413 		sub	r3,r3,r4,lsr #5
- 105              	@ 0 "" 2
- 106              		.thumb
- 107              		.syntax unified
- 108 00a0 DBB2     		uxtb	r3, r3
- 109 00a2 FFF7FEFF 		bl	printf(PLT)
- 110 00a6 4FF00000 		mov	r0, #0
- 111 00aa 03B0     		add	sp, sp, #12
- 112              		@ sp needed
- 113 00ac DDE90045 		ldrd	r4, r5, [sp]
- 114 00b0 02B0     		add	sp, sp, #8
- 115 00b2 5DF804FB 		ldr	pc, [sp], #4
- 116              	.L5:
- 117 00b6 00BF     		.align	2
- 118              	.L4:
- 119 00b8 9C000000 		.word	.LC0-(.LPIC0+4)
- 120 00bc 9E000000 		.word	.LC1-(.LPIC1+4)
- 121 00c0 9A000000 		.word	.LC3-(.LPIC3+4)
- 122 00c4 96000000 		.word	.LC2-(.LPIC2+4)
- 123 00c8 8C000000 		.word	.LC4-(.LPIC4+4)
- 124 00cc 82000000 		.word	.LC5-(.LPIC6+4)
- 125 00d0 00000000 		.word	stdout(GOT)
- 126 00d4 7A000000 		.word	_GLOBAL_OFFSET_TABLE_-(.LPIC8+4)
- 127 00d8 7A000000 		.word	.LC6-(.LPIC9+4)
- 128 00dc 72000000 		.word	.LC7-(.LPIC10+4)
- 129 00e0 5C000000 		.word	.LC8-(.LPIC11+4)
- 130 00e4 50000000 		.word	.LC9-(.LPIC12+4)
- 131              		.size	main, .-main
- 132              		.section	.rodata.str1.4,"aMS",%progbits,1
- 133              		.align	2
- 134              	.LC0:
- 135 0000 574F5244 		.ascii	"WORDSIZE\000"
- 135      53495A45 
- 135      00
- 136 0009 000000   		.space	3
- 137              	.LC1:
- 138 000c 0A252D31 		.ascii	"\012%-12s : %u\012\000"
- 138      3273203A 
- 138      2025750A 
- 138      00
- 139 0019 000000   		.space	3
- 140              	.LC2:
- 141 001c 5F49535F 		.ascii	"_IS_ARM\000"
- 141      41524D00 
- 142              	.LC3:
- 143 0024 252D3132 		.ascii	"%-12s : %u\012\000"
- 143      73203A20 
- 143      25750A00 
- 144              	.LC4:
- 145 0030 5F49535F 		.ascii	"_IS_THUMB\000"
- 145      5448554D 
- 145      4200
- 146 003a 0000     		.space	2
- 147              	.LC5:
- 148 003c 5F49535F 		.ascii	"_IS_IN_THUMB\000"
- 148      494E5F54 
- 148      48554D42 
- 148      00
- 149 0049 000000   		.space	3
- 150              	.LC6:
- 151 004c 0A496E70 		.ascii	"\012Input unsigned integer> \000"
- 151      75742075 
- 151      6E736967 
- 151      6E656420 
- 151      696E7465 
- 152 0066 0000     		.space	2
- 153              	.LC7:
- 154 0068 256C6C75 		.ascii	"%llu\000"
+  78 006c 1E48     		ldr	r0, .L4+40
+  79 006e 0099     		ldr	r1, [sp]
+  80              	.LPIC11:
+  81 0070 7844     		add	r0, pc
+  82 0072 FFF7FEFF 		bl	printf(PLT)
+  83 0076 1D48     		ldr	r0, .L4+44
+  84 0078 2346     		mov	r3, r4
+  85 007a 0099     		ldr	r1, [sp]
+  86              		.syntax unified
+  87              	@ 557 "bitscan.h" 1
+  88 007c 91FAA1F2 		rbit	r2,r1
+  89 0080 B2FA82F2 		clz	r2,r2
+  90 0084 A3EB5213 		sub	r3,r3,r2,lsr #5
+  91              	@ 0 "" 2
+  92              		.thumb
+  93              		.syntax unified
+  94 0088 DBB2     		uxtb	r3, r3
+  95              	.LPIC12:
+  96 008a 7844     		add	r0, pc
+  97 008c FFF7FEFF 		bl	printf(PLT)
+  98 0090 1748     		ldr	r0, .L4+48
+  99 0092 2346     		mov	r3, r4
+ 100 0094 4FF01F02 		mov	r2, #31
+ 101 0098 0099     		ldr	r1, [sp]
+ 102              	.LPIC13:
+ 103 009a 7844     		add	r0, pc
+ 104 009c 0C46     		mov	r4, r1
+ 105              		.syntax unified
+ 106              	@ 594 "bitscan.h" 1
+ 107 009e B4FA84F4 		clz	r4,r4
+ 108 00a2 A2EB0402 		sub	r2,r2,r4
+ 109 00a6 A3EB5413 		sub	r3,r3,r4,lsr #5
+ 110              	@ 0 "" 2
+ 111              		.thumb
+ 112              		.syntax unified
+ 113 00aa DBB2     		uxtb	r3, r3
+ 114 00ac FFF7FEFF 		bl	printf(PLT)
+ 115 00b0 4FF00000 		mov	r0, #0
+ 116 00b4 03B0     		add	sp, sp, #12
+ 117              		@ sp needed
+ 118 00b6 DDE90045 		ldrd	r4, r5, [sp]
+ 119 00ba 02B0     		add	sp, sp, #8
+ 120 00bc 5DF804FB 		ldr	pc, [sp], #4
+ 121              	.L5:
+ 122              		.align	2
+ 123              	.L4:
+ 124 00c0 A4000000 		.word	.LC0-(.LPIC0+4)
+ 125 00c4 A6000000 		.word	.LC1-(.LPIC1+4)
+ 126 00c8 A2000000 		.word	.LC3-(.LPIC3+4)
+ 127 00cc 9E000000 		.word	.LC2-(.LPIC2+4)
+ 128 00d0 94000000 		.word	.LC4-(.LPIC4+4)
+ 129 00d4 8A000000 		.word	.LC5-(.LPIC6+4)
+ 130 00d8 00000000 		.word	stdout(GOT)
+ 131 00dc 82000000 		.word	_GLOBAL_OFFSET_TABLE_-(.LPIC8+4)
+ 132 00e0 82000000 		.word	.LC6-(.LPIC9+4)
+ 133 00e4 7A000000 		.word	.LC7-(.LPIC10+4)
+ 134 00e8 74000000 		.word	.LC8-(.LPIC11+4)
+ 135 00ec 5E000000 		.word	.LC9-(.LPIC12+4)
+ 136 00f0 52000000 		.word	.LC10-(.LPIC13+4)
+ 137              		.size	main, .-main
+ 138              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 139              		.align	2
+ 140              	.LC0:
+ 141 0000 574F5244 		.ascii	"WORDSIZE\000"
+ 141      53495A45 
+ 141      00
+ 142 0009 000000   		.space	3
+ 143              	.LC1:
+ 144 000c 0A252D31 		.ascii	"\012%-12s : %u\012\000"
+ 144      3273203A 
+ 144      2025750A 
+ 144      00
+ 145 0019 000000   		.space	3
+ 146              	.LC2:
+ 147 001c 5F49535F 		.ascii	"_IS_ARM\000"
+ 147      41524D00 
+ 148              	.LC3:
+ 149 0024 252D3132 		.ascii	"%-12s : %u\012\000"
+ 149      73203A20 
+ 149      25750A00 
+ 150              	.LC4:
+ 151 0030 5F49535F 		.ascii	"_IS_THUMB\000"
+ 151      5448554D 
+ 151      4200
+ 152 003a 0000     		.space	2
+ 153              	.LC5:
+ 154 003c 5F49535F 		.ascii	"_IS_IN_THUMB\000"
+ 154      494E5F54 
+ 154      48554D42 
  154      00
- 155 006d 000000   		.space	3
- 156              	.LC8:
- 157 0070 0A5F4269 		.ascii	"\012_BitScanForward( %lu ): %u (Success=%u)\012\000"
- 157      74536361 
- 157      6E466F72 
- 157      77617264 
- 157      2820256C 
- 158 009a 0000     		.space	2
- 159              	.LC9:
- 160 009c 5F426974 		.ascii	"_BitScanReverse( %lu ): %u (Success=%u)\012\000"
- 160      5363616E 
- 160      52657665 
- 160      72736528 
- 160      20256C75 
- 161              		.ident	"GCC: (Debian 8.3.0-2) 8.3.0"
- 162              		.section	.note.GNU-stack,"",%progbits
+ 155 0049 000000   		.space	3
+ 156              	.LC6:
+ 157 004c 0A496E70 		.ascii	"\012Input unsigned integer> \000"
+ 157      75742075 
+ 157      6E736967 
+ 157      6E656420 
+ 157      696E7465 
+ 158 0066 0000     		.space	2
+ 159              	.LC7:
+ 160 0068 256C6C75 		.ascii	"%llu\000"
+ 160      00
+ 161 006d 000000   		.space	3
+ 162              	.LC8:
+ 163 0070 0A33322D 		.ascii	"\01232-bit input value: %lu\012\000"
+ 163      62697420 
+ 163      696E7075 
+ 163      74207661 
+ 163      6C75653A 
+ 164 008a 0000     		.space	2
+ 165              	.LC9:
+ 166 008c 5F426974 		.ascii	"_BitScanForward( %lu ): %u (Success=%u)\012\000"
+ 166      5363616E 
+ 166      466F7277 
+ 166      61726428 
+ 166      20256C75 
+ 167 00b5 000000   		.space	3
+ 168              	.LC10:
+ 169 00b8 5F426974 		.ascii	"_BitScanReverse( %lu ): %u (Success=%u)\012\000"
+ 169      5363616E 
+ 169      52657665 
+ 169      72736528 
+ 169      20256C75 
+ 170              		.ident	"GCC: (Debian 8.3.0-2) 8.3.0"
+ 171              		.section	.note.GNU-stack,"",%progbits

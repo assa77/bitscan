@@ -38,9 +38,10 @@ int main( void )
 {
 	unsigned long long input;
 	unsigned result;
-	unsigned zf;
+	unsigned status;
 
 	printf( "\n%-12s : %u\n", "WORDSIZE", ( unsigned )__WORDSIZE );
+
 #ifdef _IS_ARM
 	printf( "%-12s : %u\n", "_IS_ARM", ( unsigned )_IS_ARM );
 #endif
@@ -57,19 +58,21 @@ int main( void )
 	fputs( "\nInput unsigned integer> ", stdout );
 	scanf( "%llu", &input );
 
+	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 #ifdef _IS_BITSCANF32
-	zf = _BSF32( &result, ( unsigned long )input );
-	printf( "\n_BitScanForward( %lu ): %u (Success=%u)\n", ( unsigned long )input, result, zf );
+	status = _BSF32( &result, ( uint32_t )input );
+	printf( "_BitScanForward( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 #endif
 #ifdef _IS_BITSCANR32
-	zf = _BSR32( &result, ( unsigned long )input );
-	printf( "_BitScanReverse( %lu ): %u (Success=%u)\n", ( unsigned long )input, result, zf );
+	status = _BSR32( &result, ( uint32_t )input );
+	printf( "_BitScanReverse( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 #endif
 #ifdef _IS_BITSCAN64
-	zf = _BSF64( &result, input );
-	printf( "\n_BitScanForward64( %llu ): %u (Success=%u)\n", input, result, zf );
-	zf = _BSR64( &result, input );
-	printf( "_BitScanReverse64( %llu ): %u (Success=%u)\n", input, result, zf );
+	printf( "\n64-bit input value: %llu\n", input );
+	status = _BSF64( &result, input );
+	printf( "_BitScanForward64( %llu ): %u (Success=%u)\n", input, result, status );
+	status = _BSR64( &result, input );
+	printf( "_BitScanReverse64( %llu ): %u (Success=%u)\n", input, result, status );
 #endif
 
 	return EXIT_SUCCESS;

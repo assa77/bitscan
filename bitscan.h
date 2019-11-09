@@ -25,6 +25,9 @@
 #define _ASSA_BITSCAN_H_INCLUDED
 
 
+/*
+* stdint.h/cstdint is required for now
+*/
 #ifdef __cplusplus
 # include <cstdint>
 #else
@@ -32,6 +35,9 @@
 #endif
 
 
+/*
+* Intel compiler definitions
+*/
 #ifndef __INTEL_COMPILER
 # ifdef __ICL
 #  define __INTEL_COMPILER	__ICL
@@ -50,8 +56,10 @@
 
 
 /*
-* TODO: Complete ARM features detection: word size, compatible with types.h,
-*	check endianness (__ARMEB__ for BE, __ARM_EABI__, __EABI__, __VFP_FP__,
+* ARM target definitions
+*
+* TODO: Complete ARM features detection: word size compatible with types.h,
+*	verify endianness (__ARMEB__ for BE, __ARM_EABI__, __EABI__, __VFP_FP__,
 *	_WIN32_WCE, ANDROID for ME)
 */
 #ifdef _IS_ARM64
@@ -175,9 +183,7 @@
 
 
 /*
-* Check the target architecture, e.g.:
-*  https://sourceforge.net/p/predef/wiki/Architectures/
-*  https://www.boost.org/doc/libs/1_58_0/libs/predef/doc/html/predef/reference/boost_arch_architecture_macros.html
+* Various BitScan implemenations
 */
 #ifdef _IS_BITSCAN64
 # undef _IS_BITSCAN64
@@ -225,10 +231,10 @@
 # define _IS_BITSCANR32		1
 
 # ifdef _WIN64
+/* or # if defined( _M_X64 ) || defined( _M_ARM64 ) || defined( _M_IA64 ) */
 #  ifndef WORDSIZE
 #   define WORDSIZE		64
 #  endif
-/* or # if defined( _M_X64 ) || defined( _M_ARM64 ) || defined( _M_IA64 ) */
 /* Prototypes: */
 /*  unsigned char _BitScanForward64( unsigned long *_Index, unsigned __int64 _Mask ); */
 /*  unsigned char _BitScanReverse64( unsigned long *_Index, unsigned __int64 _Mask ); */
@@ -251,8 +257,8 @@
 
 #elif defined( __GNUC__ ) || defined( __INTEL_COMPILER )
 
-# if defined( __amd64__ ) || defined( __amd64 ) || defined( __x86_64__ ) ||\
-	defined( __x86_64 ) || defined( _M_AMD64 ) || defined( _M_X64 ) ||\
+# if defined( __amd64__ ) || defined( __amd64 ) || defined( __x86_64__ ) || \
+	defined( __x86_64 ) || defined( _M_AMD64 ) || defined( _M_X64 ) || \
 	defined( M_X64 )
 
 static __inline__ __attribute__ ((__always_inline__))
@@ -368,10 +374,10 @@ unsigned char _BitScanReverse64( unsigned *i, uint64_t m )
 #   define WORDSIZE		__WORDSIZE
 #  endif
 
-# elif defined( __386__ ) || defined( _I386 ) || defined( __i386__ ) || defined( __i386 ) ||\
-	defined( _M_I386 ) || defined( M_I386 ) || defined( DOS386 ) ||\
-	defined( __i486__ ) || defined( __i586__ ) || defined( __i686__ ) ||\
-	defined( __FLAT__ ) || ( defined( _M_IX86 ) && _M_IX86 >= 300 ) ||\
+# elif defined( __386__ ) || defined( _I386 ) || defined( __i386__ ) || defined( __i386 ) || \
+	defined( _M_I386 ) || defined( M_I386 ) || defined( DOS386 ) || \
+	defined( __i486__ ) || defined( __i586__ ) || defined( __i686__ ) || \
+	defined( __FLAT__ ) || ( defined( _M_IX86 ) && _M_IX86 >= 300 ) || \
 	( defined( __I86__ ) && __I86__ >= 3 )
 
 static __inline__ __attribute__ ((__always_inline__))
