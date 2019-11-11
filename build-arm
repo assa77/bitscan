@@ -7,7 +7,7 @@ ARM="arm-linux-gnueabihf-gcc"
 ARM64=
 [[ "$ARCH" =~ ^.*64$ ]] && ARM64="aarch64-linux-gnu-gcc"
 
-#OPTS="-O3 -Wall -Wparentheses -ftree-vectorize"
+#OPTS="-O3 -Wall -Wparentheses -ftree-vectorize -std=c99"
 OPTS="-O3 -Wall -ftree-vectorize -std=c99"
 OPTS32="$OPTS -mneon-for-64bits -mfloat-abi=hard -mlittle-endian -munaligned-access"
 OPTS64="$OPTS -mlittle-endian"
