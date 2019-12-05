@@ -1,0 +1,183 @@
+   1              		.cpu cortex-a57
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 23, 1
+   4              		.eabi_attribute 24, 1
+   5              		.eabi_attribute 25, 1
+   6              		.eabi_attribute 26, 2
+   7              		.eabi_attribute 30, 2
+   8              		.eabi_attribute 34, 1
+   9              		.eabi_attribute 18, 4
+  10              		.file	"bitscan.cpp"
+  11              		.text
+  12              		.section	.text.startup,"ax",%progbits
+  13              		.align	2
+  14              		.global	main
+  15              		.arch armv8-a
+  16              		.arch_extension crc
+  17              		.syntax unified
+  18              		.arm
+  19              		.fpu neon-fp-armv8
+  20              		.type	main, %function
+  21              	main:
+  22              		.fnstart
+  23              	.LFB41:
+  24              		@ args = 0, pretend = 0, frame = 8
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 FC406DE1 		strd	r4, [sp, #-12]!
+  27              		.save {r4, r5, lr}
+  28 0004 005000E3 		movw	r5, #:lower16:stdout
+  29 0008 005040E3 		movt	r5, #:upper16:stdout
+  30 000c 5D20A0E3 		mov	r2, #93
+  31 0010 0110A0E3 		mov	r1, #1
+  32 0014 08E08DE5 		str	lr, [sp, #8]
+  33 0018 000000E3 		movw	r0, #:lower16:.LC0
+  34 001c 000040E3 		movt	r0, #:upper16:.LC0
+  35 0020 003095E5 		ldr	r3, [r5]
+  36              		.pad #12
+  37 0024 0CD04DE2 		sub	sp, sp, #12
+  38 0028 004000E3 		movw	r4, #:lower16:.LC2
+  39 002c 004040E3 		movt	r4, #:upper16:.LC2
+  40 0030 FEFFFFEB 		bl	fwrite
+  41 0034 0400A0E1 		mov	r0, r4
+  42 0038 2020A0E3 		mov	r2, #32
+  43 003c 001000E3 		movw	r1, #:lower16:.LC1
+  44 0040 001040E3 		movt	r1, #:upper16:.LC1
+  45 0044 FEFFFFEB 		bl	printf
+  46 0048 0400A0E1 		mov	r0, r4
+  47 004c 0820A0E3 		mov	r2, #8
+  48 0050 001000E3 		movw	r1, #:lower16:.LC3
+  49 0054 001040E3 		movt	r1, #:upper16:.LC3
+  50 0058 FEFFFFEB 		bl	printf
+  51 005c 0400A0E1 		mov	r0, r4
+  52 0060 0420A0E3 		mov	r2, #4
+  53 0064 001000E3 		movw	r1, #:lower16:.LC4
+  54 0068 001040E3 		movt	r1, #:upper16:.LC4
+  55 006c FEFFFFEB 		bl	printf
+  56 0070 0400A0E1 		mov	r0, r4
+  57 0074 0120A0E3 		mov	r2, #1
+  58 0078 001000E3 		movw	r1, #:lower16:.LC5
+  59 007c 001040E3 		movt	r1, #:upper16:.LC5
+  60 0080 FEFFFFEB 		bl	printf
+  61 0084 1920A0E3 		mov	r2, #25
+  62 0088 0110A0E3 		mov	r1, #1
+  63 008c 003095E5 		ldr	r3, [r5]
+  64 0090 000000E3 		movw	r0, #:lower16:.LC6
+  65 0094 000040E3 		movt	r0, #:upper16:.LC6
+  66 0098 FEFFFFEB 		bl	fwrite
+  67 009c 0D10A0E1 		mov	r1, sp
+  68 00a0 000000E3 		movw	r0, #:lower16:.LC7
+  69 00a4 000040E3 		movt	r0, #:upper16:.LC7
+  70 00a8 0140A0E3 		mov	r4, #1
+  71 00ac FEFFFFEB 		bl	scanf
+  72 00b0 000000E3 		movw	r0, #:lower16:.LC8
+  73 00b4 000040E3 		movt	r0, #:upper16:.LC8
+  74 00b8 00109DE5 		ldr	r1, [sp]
+  75 00bc FEFFFFEB 		bl	printf
+  76 00c0 00C09DE5 		ldr	ip, [sp]
+  77 00c4 0430A0E1 		mov	r3, r4
+  78 00c8 1F20A0E3 		mov	r2, #31
+  79 00cc 000000E3 		movw	r0, #:lower16:.LC9
+  80 00d0 000040E3 		movt	r0, #:upper16:.LC9
+  81 00d4 0C10A0E1 		mov	r1, ip
+  82              		.syntax divided
+  83              	@ 1184 "bitscan.h" 1
+  84 00d8 1CCF6FE1 		clz	ip,ip
+  85 00dc 0C2042E0 		sub	r2,r2,ip
+  86 00e0 AC3243E0 		sub	r3,r3,ip,lsr #5
+  87              	@ 0 "" 2
+  88              		.arm
+  89              		.syntax unified
+  90 00e4 7330EFE6 		uxtb	r3, r3
+  91 00e8 FEFFFFEB 		bl	printf
+  92 00ec 00109DE5 		ldr	r1, [sp]
+  93 00f0 000000E3 		movw	r0, #:lower16:.LC10
+  94 00f4 000040E3 		movt	r0, #:upper16:.LC10
+  95              		.syntax divided
+  96              	@ 1164 "bitscan.h" 1
+  97 00f8 312FFFE6 		rbit	r2,r1
+  98 00fc 122F6FE1 		clz	r2,r2
+  99 0100 A24244E0 		sub	r4,r4,r2,lsr #5
+ 100              	@ 0 "" 2
+ 101              		.arm
+ 102              		.syntax unified
+ 103 0104 7430EFE6 		uxtb	r3, r4
+ 104 0108 FEFFFFEB 		bl	printf
+ 105 010c 0000A0E3 		mov	r0, #0
+ 106 0110 0CD08DE2 		add	sp, sp, #12
+ 107              		@ sp needed
+ 108 0114 D040CDE1 		ldrd	r4, [sp]
+ 109 0118 08D08DE2 		add	sp, sp, #8
+ 110 011c 04F09DE4 		ldr	pc, [sp], #4
+ 111              		.fnend
+ 112              		.size	main, .-main
+ 113              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 114              		.align	2
+ 115              	.LC0:
+ 116 0000 0A426974 		.ascii	"\012BitScan - Copyright (c) 2019 by Alexander M. Al"
+ 116      5363616E 
+ 116      202D2043 
+ 116      6F707972 
+ 116      69676874 
+ 117 0030 62657274 		.ascii	"bertian <assa@4ip.ru>.\012All rights reserved.\012\012"
+ 117      69616E20 
+ 117      3C617373 
+ 117      61403469 
+ 117      702E7275 
+ 118 005d 00       		.ascii	"\000"
+ 119 005e 0000     		.space	2
+ 120              	.LC1:
+ 121 0060 5F5F574F 		.ascii	"__WORDSIZE\000"
+ 121      52445349 
+ 121      5A4500
+ 122 006b 00       		.space	1
+ 123              	.LC2:
+ 124 006c 252D3132 		.ascii	"%-12s : %lu\012\000"
+ 124      73203A20 
+ 124      256C750A 
+ 124      00
+ 125 0079 000000   		.space	3
+ 126              	.LC3:
+ 127 007c 5F49535F 		.ascii	"_IS_ARM\000"
+ 127      41524D00 
+ 128              	.LC4:
+ 129 0084 5F49535F 		.ascii	"_IS_THUMB\000"
+ 129      5448554D 
+ 129      4200
+ 130 008e 0000     		.space	2
+ 131              	.LC5:
+ 132 0090 5F49535F 		.ascii	"_IS_NEON\000"
+ 132      4E454F4E 
+ 132      00
+ 133 0099 000000   		.space	3
+ 134              	.LC6:
+ 135 009c 0A496E70 		.ascii	"\012Input unsigned integer> \000"
+ 135      75742075 
+ 135      6E736967 
+ 135      6E656420 
+ 135      696E7465 
+ 136 00b6 0000     		.space	2
+ 137              	.LC7:
+ 138 00b8 256C6C75 		.ascii	"%llu\000"
+ 138      00
+ 139 00bd 000000   		.space	3
+ 140              	.LC8:
+ 141 00c0 0A33322D 		.ascii	"\01232-bit input value: %lu\012\000"
+ 141      62697420 
+ 141      696E7075 
+ 141      74207661 
+ 141      6C75653A 
+ 142 00da 0000     		.space	2
+ 143              	.LC9:
+ 144 00dc 5F425352 		.ascii	"_BSR32( %lu ): %u (Success=%u)\012\000"
+ 144      33322820 
+ 144      256C7520 
+ 144      293A2025 
+ 144      75202853 
+ 145              	.LC10:
+ 146 00fc 5F425346 		.ascii	"_BSF32( %lu ): %u (Success=%u)\012\000"
+ 146      33322820 
+ 146      256C7520 
+ 146      293A2025 
+ 146      75202853 
+ 147              		.ident	"GCC: (Raspbian 8.3.0-6+rpi1) 8.3.0"
+ 148              		.section	.note.GNU-stack,"",%progbits

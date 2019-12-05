@@ -10,19 +10,32 @@ INCLUDELIB LIBCMT
 INCLUDELIB OLDNAMES
 
 _DATA	SEGMENT
-$SG10824 DB	'WORDSIZE', 00H
-	ORG $+3
-$SG10825 DB	0aH, '%-12s : %u', 0aH, 00H
-	ORG $+3
-$SG10826 DB	0aH, 'Input unsigned integer> ', 00H
+$SG42929 DB	0aH, 'BitScan - Copyright (c) 2019 by Alexander M. Albert'
+	DB	'ian <assa@4ip.ru>.', 0aH, 'All rights reserved.', 0aH, 0aH, 00H
 	ORG $+2
-$SG10827 DB	'%llu', 00H
+$SG42930 DB	'__WORDSIZE', 00H
+	ORG $+1
+$SG42931 DB	'%-12s : %lu', 0aH, 00H
 	ORG $+3
-$SG10828 DB	0aH, '32-bit input value: %lu', 0aH, 00H
+$SG42932 DB	'_IS_X86', 00H
+$SG42933 DB	'%-12s : %lu', 0aH, 00H
+	ORG $+3
+$SG42934 DB	'_IS_386', 00H
+$SG42935 DB	'%-12s : %lu', 0aH, 00H
+	ORG $+3
+$SG42936 DB	0aH, 'Input unsigned integer> ', 00H
 	ORG $+2
-$SG10829 DB	'_BitScanForward( %lu ): %u (Success=%u)', 0aH, 00H
+$SG42937 DB	'%llu', 00H
 	ORG $+3
-$SG10830 DB	'_BitScanReverse( %lu ): %u (Success=%u)', 0aH, 00H
+$SG42938 DB	0aH, '32-bit input value: %lu', 0aH, 00H
+	ORG $+2
+$SG42939 DB	'_BSR32( %lu ): %u (Success=%u)', 0aH, 00H
+$SG42940 DB	'_BSF32( %lu ): %u (Success=%u)', 0aH, 00H
+$SG42941 DB	0aH, '64-bit input value: %llu', 0aH, 00H
+	ORG $+1
+$SG42942 DB	'_BSR64( %llu ): %u (Success=%u)', 0aH, 00H
+	ORG $+3
+$SG42943 DB	'_BSF64( %llu ): %u (Success=%u)', 0aH, 00H
 _DATA	ENDS
 PUBLIC	___local_stdio_printf_options
 PUBLIC	___local_stdio_scanf_options
@@ -30,6 +43,8 @@ PUBLIC	__vfprintf_l
 PUBLIC	_printf
 PUBLIC	__vfscanf_l
 PUBLIC	_scanf
+PUBLIC	__InlineBitScanForward64
+PUBLIC	__InlineBitScanReverse64
 PUBLIC	_main
 EXTRN	___acrt_iob_func:PROC
 EXTRN	_fputs:PROC
@@ -46,111 +61,298 @@ _result$ = -12						; size = 4
 _input$ = -8						; size = 8
 _main	PROC
 
-; 38   : {
+; 42   : {
 
   00000	83 ec 0c	 sub	 esp, 12			; 0000000cH
+  00003	56		 push	 esi
 
-; 39   : 	unsigned long long input;
-; 40   : 	unsigned result;
-; 41   : 	unsigned status;
-; 42   : 
-; 43   : 	printf( "\n%-12s : %u\n", "WORDSIZE", ( unsigned )__WORDSIZE );
+; 43   : 	unsigned long long input;
+; 44   : 	unsigned result;
+; 45   : 	unsigned status;
+; 46   : 
+; 47   : 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
-  00003	6a 20		 push	 32			; 00000020H
-  00005	68 00 00 00 00	 push	 OFFSET $SG10824
-  0000a	68 00 00 00 00	 push	 OFFSET $SG10825
-  0000f	e8 00 00 00 00	 call	 _printf
+  00004	6a 01		 push	 1
+  00006	e8 00 00 00 00	 call	 ___acrt_iob_func
+  0000b	50		 push	 eax
+  0000c	68 00 00 00 00	 push	 OFFSET $SG42929
+  00011	e8 00 00 00 00	 call	 _fputs
 
-; 44   : 
-; 45   : #ifdef _IS_ARM
-; 46   : 	printf( "%-12s : %u\n", "_IS_ARM", ( unsigned )_IS_ARM );
-; 47   : #endif
-; 48   : #ifdef _IS_THUMB
-; 49   : 	printf( "%-12s : %u\n", "_IS_THUMB", ( unsigned )_IS_THUMB );
-; 50   : #endif
-; 51   : #ifdef _IS_IN_THUMB
-; 52   : 	printf( "%-12s : %u\n", "_IS_IN_THUMB", ( unsigned )_IS_IN_THUMB );
+; 48   : 
+; 49   : 	PRINTM( __WORDSIZE );
+
+  00016	6a 20		 push	 32			; 00000020H
+  00018	68 00 00 00 00	 push	 OFFSET $SG42930
+  0001d	68 00 00 00 00	 push	 OFFSET $SG42931
+  00022	e8 00 00 00 00	 call	 _printf
+
+; 50   : 
+; 51   : #ifdef _IS_X86
+; 52   : 	PRINTM( _IS_X86 );
+
+  00027	6a 01		 push	 1
+  00029	68 00 00 00 00	 push	 OFFSET $SG42932
+  0002e	68 00 00 00 00	 push	 OFFSET $SG42933
+  00033	e8 00 00 00 00	 call	 _printf
+
 ; 53   : #endif
-; 54   : #ifdef _IS_ARM64
-; 55   : 	printf( "%-12s : %u\n", "_IS_ARM64", ( unsigned )_IS_ARM64 );
+; 54   : #ifdef _IS_386
+; 55   : 	PRINTM( _IS_386 );
+
+  00038	6a 01		 push	 1
+  0003a	68 00 00 00 00	 push	 OFFSET $SG42934
+  0003f	68 00 00 00 00	 push	 OFFSET $SG42935
+  00044	e8 00 00 00 00	 call	 _printf
+
 ; 56   : #endif
-; 57   : 
-; 58   : 	fputs( "\nInput unsigned integer> ", stdout );
-
-  00014	6a 01		 push	 1
-  00016	e8 00 00 00 00	 call	 ___acrt_iob_func
-  0001b	50		 push	 eax
-  0001c	68 00 00 00 00	 push	 OFFSET $SG10826
-  00021	e8 00 00 00 00	 call	 _fputs
-
-; 59   : 	scanf( "%llu", &input );
-
-  00026	8d 44 24 1c	 lea	 eax, DWORD PTR _input$[esp+36]
-  0002a	50		 push	 eax
-  0002b	68 00 00 00 00	 push	 OFFSET $SG10827
-  00030	e8 00 00 00 00	 call	 _scanf
-
-; 60   : 
-; 61   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
-
-  00035	ff 74 24 24	 push	 DWORD PTR _input$[esp+44]
-  00039	68 00 00 00 00	 push	 OFFSET $SG10828
-  0003e	e8 00 00 00 00	 call	 _printf
-
-; 62   : #ifdef _IS_BITSCANF32
-; 63   : 	status = _BSF32( &result, ( uint32_t )input );
-
-  00043	8b 4c 24 2c	 mov	 ecx, DWORD PTR _input$[esp+52]
-  00047	0f bc c1	 bsf	 eax, ecx
-  0004a	89 44 24 28	 mov	 DWORD PTR _result$[esp+52], eax
-  0004e	0f 95 c0	 setne	 al
-  00051	0f b6 c0	 movzx	 eax, al
-
-; 64   : 	printf( "_BitScanForward( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
-
-  00054	50		 push	 eax
-  00055	ff 74 24 2c	 push	 DWORD PTR _result$[esp+56]
-  00059	51		 push	 ecx
-  0005a	68 00 00 00 00	 push	 OFFSET $SG10829
-  0005f	e8 00 00 00 00	 call	 _printf
-
+; 57   : #ifdef _IS_X64
+; 58   : 	PRINTM( _IS_X64 );
+; 59   : #endif
+; 60   : #ifdef _IS_ARM
+; 61   : 	PRINTM( _IS_ARM );
+; 62   : #endif
+; 63   : #ifdef _IS_THUMB
+; 64   : 	PRINTM( _IS_THUMB );
 ; 65   : #endif
-; 66   : #ifdef _IS_BITSCANR32
-; 67   : 	status = _BSR32( &result, ( uint32_t )input );
+; 66   : #ifdef _IS_IN_THUMB
+; 67   : 	PRINTM( _IS_IN_THUMB );
+; 68   : #endif
+; 69   : #ifdef _IS_ARM64
+; 70   : 	PRINTM( _IS_ARM64 );
+; 71   : #endif
+; 72   : #ifdef _IS_NEON
+; 73   : 	PRINTM( _IS_NEON );
+; 74   : #endif
+; 75   : 
+; 76   : 	fputs( "\nInput unsigned integer> ", stdout );
 
-  00064	8b 4c 24 3c	 mov	 ecx, DWORD PTR _input$[esp+68]
-  00068	0f bd c1	 bsr	 eax, ecx
-  0006b	89 44 24 38	 mov	 DWORD PTR _result$[esp+68], eax
-  0006f	0f 95 c0	 setne	 al
-  00072	0f b6 c0	 movzx	 eax, al
+  00049	6a 01		 push	 1
+  0004b	e8 00 00 00 00	 call	 ___acrt_iob_func
+  00050	50		 push	 eax
+  00051	68 00 00 00 00	 push	 OFFSET $SG42936
+  00056	e8 00 00 00 00	 call	 _fputs
 
-; 68   : 	printf( "_BitScanReverse( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+; 77   : 	scanf( "%llu", &input );
 
-  00075	50		 push	 eax
-  00076	ff 74 24 3c	 push	 DWORD PTR _result$[esp+72]
-  0007a	51		 push	 ecx
-  0007b	68 00 00 00 00	 push	 OFFSET $SG10830
-  00080	e8 00 00 00 00	 call	 _printf
-  00085	83 c4 48	 add	 esp, 72			; 00000048H
+  0005b	8d 44 24 44	 lea	 eax, DWORD PTR _input$[esp+76]
+  0005f	50		 push	 eax
+  00060	68 00 00 00 00	 push	 OFFSET $SG42937
+  00065	e8 00 00 00 00	 call	 _scanf
+  0006a	83 c4 44	 add	 esp, 68			; 00000044H
 
-; 69   : #endif
-; 70   : #ifdef _IS_BITSCAN64
-; 71   : 	printf( "\n64-bit input value: %llu\n", input );
-; 72   : 	status = _BSF64( &result, input );
-; 73   : 	printf( "_BitScanForward64( %llu ): %u (Success=%u)\n", input, result, status );
-; 74   : 	status = _BSR64( &result, input );
-; 75   : 	printf( "_BitScanReverse64( %llu ): %u (Success=%u)\n", input, result, status );
-; 76   : #endif
-; 77   : 
-; 78   : 	return EXIT_SUCCESS;
+; 78   : 
+; 79   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 
-  00088	33 c0		 xor	 eax, eax
+  0006d	ff 74 24 08	 push	 DWORD PTR _input$[esp+16]
+  00071	68 00 00 00 00	 push	 OFFSET $SG42938
+  00076	e8 00 00 00 00	 call	 _printf
 
-; 79   : }
+; 80   : #ifdef _IS_BITSCANR32
+; 81   : 	status = _BSR32( &result, ( uint32_t )input );
 
-  0008a	83 c4 0c	 add	 esp, 12			; 0000000cH
-  0008d	c3		 ret	 0
+  0007b	8b 4c 24 10	 mov	 ecx, DWORD PTR _input$[esp+24]
+  0007f	0f bd c1	 bsr	 eax, ecx
+  00082	89 44 24 0c	 mov	 DWORD PTR _result$[esp+24], eax
+  00086	0f 95 c0	 setne	 al
+  00089	0f b6 c0	 movzx	 eax, al
+
+; 82   : 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+
+  0008c	50		 push	 eax
+  0008d	ff 74 24 10	 push	 DWORD PTR _result$[esp+28]
+  00091	51		 push	 ecx
+  00092	68 00 00 00 00	 push	 OFFSET $SG42939
+  00097	e8 00 00 00 00	 call	 _printf
+
+; 83   : #endif
+; 84   : #ifdef _IS_BITSCANF32
+; 85   : 	status = _BSF32( &result, ( uint32_t )input );
+
+  0009c	8b 4c 24 20	 mov	 ecx, DWORD PTR _input$[esp+40]
+  000a0	0f bc c1	 bsf	 eax, ecx
+  000a3	89 44 24 1c	 mov	 DWORD PTR _result$[esp+40], eax
+  000a7	0f 95 c0	 setne	 al
+  000aa	0f b6 c0	 movzx	 eax, al
+
+; 86   : 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+
+  000ad	50		 push	 eax
+  000ae	ff 74 24 20	 push	 DWORD PTR _result$[esp+44]
+  000b2	51		 push	 ecx
+  000b3	68 00 00 00 00	 push	 OFFSET $SG42940
+  000b8	e8 00 00 00 00	 call	 _printf
+
+; 87   : #endif
+; 88   : #ifdef _IS_BITSCAN64
+; 89   : 	printf( "\n64-bit input value: %llu\n", input );
+
+  000bd	ff 74 24 34	 push	 DWORD PTR _input$[esp+60]
+  000c1	ff 74 24 34	 push	 DWORD PTR _input$[esp+60]
+  000c5	68 00 00 00 00	 push	 OFFSET $SG42941
+  000ca	e8 00 00 00 00	 call	 _printf
+
+; 90   : 	status = _BSR64( &result, input );
+
+  000cf	8b 74 24 40	 mov	 esi, DWORD PTR _input$[esp+72]
+  000d3	83 c4 34	 add	 esp, 52			; 00000034H
+  000d6	0f bd ce	 bsr	 ecx, esi
+  000d9	8b 54 24 08	 mov	 edx, DWORD PTR _input$[esp+16]
+  000dd	74 0a		 je	 SHORT $LN4@main
+  000df	83 c1 20	 add	 ecx, 32			; 00000020H
+  000e2	b8 01 00 00 00	 mov	 eax, 1
+  000e7	eb 0b		 jmp	 SHORT $LN5@main
+$LN4@main:
+  000e9	0f bd ca	 bsr	 ecx, edx
+  000ec	b8 00 00 00 00	 mov	 eax, 0
+  000f1	0f 95 c0	 setne	 al
+$LN5@main:
+
+; 91   : 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
+
+  000f4	50		 push	 eax
+  000f5	51		 push	 ecx
+  000f6	56		 push	 esi
+  000f7	52		 push	 edx
+  000f8	68 00 00 00 00	 push	 OFFSET $SG42942
+  000fd	e8 00 00 00 00	 call	 _printf
+
+; 92   : 	status = _BSF64( &result, input );
+
+  00102	8b 74 24 1c	 mov	 esi, DWORD PTR _input$[esp+36]
+  00106	83 c4 14	 add	 esp, 20			; 00000014H
+  00109	0f bc c6	 bsf	 eax, esi
+  0010c	8b 54 24 0c	 mov	 edx, DWORD PTR _input$[esp+20]
+  00110	75 08		 jne	 SHORT $LN11@main
+  00112	0f bc c2	 bsf	 eax, edx
+  00115	74 0a		 je	 SHORT $LN9@main
+  00117	83 c0 20	 add	 eax, 32			; 00000020H
+$LN11@main:
+  0011a	b9 01 00 00 00	 mov	 ecx, 1
+  0011f	eb 02		 jmp	 SHORT $LN7@main
+$LN9@main:
+  00121	33 c9		 xor	 ecx, ecx
+$LN7@main:
+
+; 93   : 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
+
+  00123	51		 push	 ecx
+  00124	50		 push	 eax
+  00125	52		 push	 edx
+  00126	56		 push	 esi
+  00127	68 00 00 00 00	 push	 OFFSET $SG42943
+  0012c	e8 00 00 00 00	 call	 _printf
+  00131	83 c4 14	 add	 esp, 20			; 00000014H
+
+; 94   : #endif
+; 95   : 
+; 96   : 	return EXIT_SUCCESS;
+
+  00134	33 c0		 xor	 eax, eax
+  00136	5e		 pop	 esi
+
+; 97   : }
+
+  00137	83 c4 0c	 add	 esp, 12			; 0000000cH
+  0013a	c3		 ret	 0
 _main	ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
+;	COMDAT __InlineBitScanReverse64
+_TEXT	SEGMENT
+_Index$ = 8						; size = 4
+_Mask$ = 12						; size = 8
+__InlineBitScanReverse64 PROC				; COMDAT
+
+; 6354 :     if (_BitScanReverse(Index, (DWORD)(Mask >> 32))) {
+
+  00000	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _Mask$[esp]
+  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
+  00009	89 01		 mov	 DWORD PTR [ecx], eax
+  0000b	74 06		 je	 SHORT $LN2@InlineBitS
+
+; 6355 :         *Index += 32;
+
+  0000d	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
+
+; 6356 :         return 1;
+
+  00010	b0 01		 mov	 al, 1
+
+; 6360 :         return 1;
+; 6361 :     }
+; 6362 : 
+; 6363 :     return 0;
+; 6364 : }
+
+  00012	c3		 ret	 0
+$LN2@InlineBitS:
+
+; 6357 :     }
+; 6358 : 
+; 6359 :     if (_BitScanReverse(Index, (DWORD)Mask)) {
+
+  00013	0f bd 44 24 08	 bsr	 eax, DWORD PTR _Mask$[esp-4]
+  00018	89 01		 mov	 DWORD PTR [ecx], eax
+  0001a	0f 95 c0	 setne	 al
+
+; 6360 :         return 1;
+; 6361 :     }
+; 6362 : 
+; 6363 :     return 0;
+; 6364 : }
+
+  0001d	c3		 ret	 0
+__InlineBitScanReverse64 ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
+;	COMDAT __InlineBitScanForward64
+_TEXT	SEGMENT
+_Index$ = 8						; size = 4
+_Mask$ = 12						; size = 8
+__InlineBitScanForward64 PROC				; COMDAT
+
+; 6332 :     if (_BitScanForward(Index, (DWORD)Mask)) {
+
+  00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _Mask$[esp-4]
+  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
+  00009	89 01		 mov	 DWORD PTR [ecx], eax
+  0000b	75 0c		 jne	 SHORT $LN5@InlineBitS
+
+; 6333 :         return 1;
+; 6334 :     }
+; 6335 : 
+; 6336 :     if (_BitScanForward(Index, (DWORD)(Mask >> 32))) {
+
+  0000d	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _Mask$[esp]
+  00012	89 01		 mov	 DWORD PTR [ecx], eax
+  00014	74 06		 je	 SHORT $LN3@InlineBitS
+
+; 6337 :         *Index += 32;
+
+  00016	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
+$LN5@InlineBitS:
+
+; 6338 :         return 1;
+
+  00019	b0 01		 mov	 al, 1
+
+; 6342 : }
+
+  0001b	c3		 ret	 0
+$LN3@InlineBitS:
+
+; 6339 :     }
+; 6340 : 
+; 6341 :     return 0;
+
+  0001c	32 c0		 xor	 al, al
+
+; 6342 : }
+
+  0001e	c3		 ret	 0
+__InlineBitScanForward64 ENDP
 _TEXT	ENDS
 ; Function compile flags: /Ogtpy
 ; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\ucrt\stdio.h

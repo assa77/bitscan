@@ -1,2 +1,2 @@
 # bitscan
-Portable BitScan implementation (for MSC, ICL, GNUC, etc. on IA32/Intel64/ARM only)
+Portable BitScan implementation (MSC, ICL, GNUC, etc. for WIN32/IA32/Intel64/ARM only)

@@ -30,7 +30,11 @@
 #include "bitscan.h"
 
 
+#define PRINTM( __x )	printf( "%-12s : %lu\n", #__x, ( unsigned long )( __x ) )
+
 #ifdef __cplusplus
+using namespace std;
+
 int main( )
 #else
 int main( void )
@@ -40,39 +44,53 @@ int main( void )
 	unsigned result;
 	unsigned status;
 
-	printf( "\n%-12s : %u\n", "WORDSIZE", ( unsigned )__WORDSIZE );
+	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
+	PRINTM( __WORDSIZE );
+
+#ifdef _IS_X86
+	PRINTM( _IS_X86 );
+#endif
+#ifdef _IS_386
+	PRINTM( _IS_386 );
+#endif
+#ifdef _IS_X64
+	PRINTM( _IS_X64 );
+#endif
 #ifdef _IS_ARM
-	printf( "%-12s : %u\n", "_IS_ARM", ( unsigned )_IS_ARM );
+	PRINTM( _IS_ARM );
 #endif
 #ifdef _IS_THUMB
-	printf( "%-12s : %u\n", "_IS_THUMB", ( unsigned )_IS_THUMB );
+	PRINTM( _IS_THUMB );
 #endif
 #ifdef _IS_IN_THUMB
-	printf( "%-12s : %u\n", "_IS_IN_THUMB", ( unsigned )_IS_IN_THUMB );
+	PRINTM( _IS_IN_THUMB );
 #endif
 #ifdef _IS_ARM64
-	printf( "%-12s : %u\n", "_IS_ARM64", ( unsigned )_IS_ARM64 );
+	PRINTM( _IS_ARM64 );
+#endif
+#ifdef _IS_NEON
+	PRINTM( _IS_NEON );
 #endif
 
 	fputs( "\nInput unsigned integer> ", stdout );
 	scanf( "%llu", &input );
 
 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
-#ifdef _IS_BITSCANF32
-	status = _BSF32( &result, ( uint32_t )input );
-	printf( "_BitScanForward( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
-#endif
 #ifdef _IS_BITSCANR32
 	status = _BSR32( &result, ( uint32_t )input );
-	printf( "_BitScanReverse( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+#endif
+#ifdef _IS_BITSCANF32
+	status = _BSF32( &result, ( uint32_t )input );
+	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 #endif
 #ifdef _IS_BITSCAN64
 	printf( "\n64-bit input value: %llu\n", input );
-	status = _BSF64( &result, input );
-	printf( "_BitScanForward64( %llu ): %u (Success=%u)\n", input, result, status );
 	status = _BSR64( &result, input );
-	printf( "_BitScanReverse64( %llu ): %u (Success=%u)\n", input, result, status );
+	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
+	status = _BSF64( &result, input );
+	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
 #endif
 
 	return EXIT_SUCCESS;
