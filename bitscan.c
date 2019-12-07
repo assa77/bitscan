@@ -20,6 +20,9 @@
 *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ****************************************************************************/
 
+/* It's better to include bitscan.h _before_ any other CRT headers, at least _before_ cstdint/stdint.h if used */
+#include "bitscan.h"
+
 #ifdef __cplusplus
 # include <cstdlib>
 # include <cstdio>
@@ -27,7 +30,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 #endif
-#include "bitscan.h"
 
 
 #define PRINTM( __x )	printf( "%-12s : %lu\n", #__x, ( unsigned long )( __x ) )

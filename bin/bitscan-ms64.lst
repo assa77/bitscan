@@ -112,16 +112,16 @@ _TEXT	SEGMENT
 input$ = 48
 main	PROC
 
-; 42   : {
+; 44   : {
 
 $LN4:
   00000	48 83 ec 28	 sub	 rsp, 40			; 00000028H
 
-; 43   : 	unsigned long long input;
-; 44   : 	unsigned result;
-; 45   : 	unsigned status;
-; 46   : 
-; 47   : 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
+; 45   : 	unsigned long long input;
+; 46   : 	unsigned result;
+; 47   : 	unsigned status;
+; 48   : 
+; 49   : 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
   00004	b9 01 00 00 00	 mov	 ecx, 1
   00009	e8 00 00 00 00	 call	 __acrt_iob_func
@@ -130,8 +130,8 @@ $LN4:
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42882
   00018	e8 00 00 00 00	 call	 fputs
 
-; 48   : 
-; 49   : 	PRINTM( __WORDSIZE );
+; 50   : 
+; 51   : 	PRINTM( __WORDSIZE );
 
   0001d	41 b8 40 00 00
 	00		 mov	 r8d, 64			; 00000040H
@@ -141,15 +141,15 @@ $LN4:
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42884
   00031	e8 00 00 00 00	 call	 printf
 
-; 50   : 
-; 51   : #ifdef _IS_X86
-; 52   : 	PRINTM( _IS_X86 );
-; 53   : #endif
-; 54   : #ifdef _IS_386
-; 55   : 	PRINTM( _IS_386 );
-; 56   : #endif
-; 57   : #ifdef _IS_X64
-; 58   : 	PRINTM( _IS_X64 );
+; 52   : 
+; 53   : #ifdef _IS_X86
+; 54   : 	PRINTM( _IS_X86 );
+; 55   : #endif
+; 56   : #ifdef _IS_386
+; 57   : 	PRINTM( _IS_386 );
+; 58   : #endif
+; 59   : #ifdef _IS_X64
+; 60   : 	PRINTM( _IS_X64 );
 
   00036	41 b8 01 00 00
 	00		 mov	 r8d, 1
@@ -159,24 +159,24 @@ $LN4:
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42886
   0004a	e8 00 00 00 00	 call	 printf
 
-; 59   : #endif
-; 60   : #ifdef _IS_ARM
-; 61   : 	PRINTM( _IS_ARM );
-; 62   : #endif
-; 63   : #ifdef _IS_THUMB
-; 64   : 	PRINTM( _IS_THUMB );
-; 65   : #endif
-; 66   : #ifdef _IS_IN_THUMB
-; 67   : 	PRINTM( _IS_IN_THUMB );
-; 68   : #endif
-; 69   : #ifdef _IS_ARM64
-; 70   : 	PRINTM( _IS_ARM64 );
-; 71   : #endif
-; 72   : #ifdef _IS_NEON
-; 73   : 	PRINTM( _IS_NEON );
-; 74   : #endif
-; 75   : 
-; 76   : 	fputs( "\nInput unsigned integer> ", stdout );
+; 61   : #endif
+; 62   : #ifdef _IS_ARM
+; 63   : 	PRINTM( _IS_ARM );
+; 64   : #endif
+; 65   : #ifdef _IS_THUMB
+; 66   : 	PRINTM( _IS_THUMB );
+; 67   : #endif
+; 68   : #ifdef _IS_IN_THUMB
+; 69   : 	PRINTM( _IS_IN_THUMB );
+; 70   : #endif
+; 71   : #ifdef _IS_ARM64
+; 72   : 	PRINTM( _IS_ARM64 );
+; 73   : #endif
+; 74   : #ifdef _IS_NEON
+; 75   : 	PRINTM( _IS_NEON );
+; 76   : #endif
+; 77   : 
+; 78   : 	fputs( "\nInput unsigned integer> ", stdout );
 
   0004f	b9 01 00 00 00	 mov	 ecx, 1
   00054	e8 00 00 00 00	 call	 __acrt_iob_func
@@ -185,28 +185,28 @@ $LN4:
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42887
   00063	e8 00 00 00 00	 call	 fputs
 
-; 77   : 	scanf( "%llu", &input );
+; 79   : 	scanf( "%llu", &input );
 
   00068	48 8d 54 24 30	 lea	 rdx, QWORD PTR input$[rsp]
   0006d	48 8d 0d 00 00
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42888
   00074	e8 00 00 00 00	 call	 scanf
 
-; 78   : 
-; 79   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
+; 80   : 
+; 81   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 
   00079	8b 54 24 30	 mov	 edx, DWORD PTR input$[rsp]
   0007d	48 8d 0d 00 00
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42889
   00084	e8 00 00 00 00	 call	 printf
 
-; 80   : #ifdef _IS_BITSCANR32
-; 81   : 	status = _BSR32( &result, ( uint32_t )input );
+; 82   : #ifdef _IS_BITSCANR32
+; 83   : 	status = _BSR32( &result, ( uint32_t )input );
 
   00089	48 8b 4c 24 30	 mov	 rcx, QWORD PTR input$[rsp]
   0008e	44 0f bd c1	 bsr	 r8d, ecx
 
-; 82   : 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+; 84   : 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
   00092	8b d1		 mov	 edx, ecx
   00094	48 8d 0d 00 00
@@ -215,14 +215,14 @@ $LN4:
   0009e	44 0f b6 c8	 movzx	 r9d, al
   000a2	e8 00 00 00 00	 call	 printf
 
-; 83   : #endif
-; 84   : #ifdef _IS_BITSCANF32
-; 85   : 	status = _BSF32( &result, ( uint32_t )input );
+; 85   : #endif
+; 86   : #ifdef _IS_BITSCANF32
+; 87   : 	status = _BSF32( &result, ( uint32_t )input );
 
   000a7	48 8b 4c 24 30	 mov	 rcx, QWORD PTR input$[rsp]
   000ac	44 0f bc c1	 bsf	 r8d, ecx
 
-; 86   : 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+; 88   : 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
   000b0	8b d1		 mov	 edx, ecx
   000b2	48 8d 0d 00 00
@@ -231,20 +231,20 @@ $LN4:
   000bc	44 0f b6 c8	 movzx	 r9d, al
   000c0	e8 00 00 00 00	 call	 printf
 
-; 87   : #endif
-; 88   : #ifdef _IS_BITSCAN64
-; 89   : 	printf( "\n64-bit input value: %llu\n", input );
+; 89   : #endif
+; 90   : #ifdef _IS_BITSCAN64
+; 91   : 	printf( "\n64-bit input value: %llu\n", input );
 
   000c5	48 8b 54 24 30	 mov	 rdx, QWORD PTR input$[rsp]
   000ca	48 8d 0d 00 00
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42892
   000d1	e8 00 00 00 00	 call	 printf
 
-; 90   : 	status = _BSR64( &result, input );
+; 92   : 	status = _BSR64( &result, input );
 
   000d6	48 8b 54 24 30	 mov	 rdx, QWORD PTR input$[rsp]
 
-; 91   : 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
+; 93   : 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
 
   000db	48 8d 0d 00 00
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42893
@@ -253,11 +253,11 @@ $LN4:
   000e9	44 0f b6 c8	 movzx	 r9d, al
   000ed	e8 00 00 00 00	 call	 printf
 
-; 92   : 	status = _BSF64( &result, input );
+; 94   : 	status = _BSF64( &result, input );
 
   000f2	48 8b 54 24 30	 mov	 rdx, QWORD PTR input$[rsp]
 
-; 93   : 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
+; 95   : 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
 
   000f7	48 8d 0d 00 00
 	00 00		 lea	 rcx, OFFSET FLAT:$SG42894
@@ -266,13 +266,13 @@ $LN4:
   00105	44 0f b6 c8	 movzx	 r9d, al
   00109	e8 00 00 00 00	 call	 printf
 
-; 94   : #endif
-; 95   : 
-; 96   : 	return EXIT_SUCCESS;
+; 96   : #endif
+; 97   : 
+; 98   : 	return EXIT_SUCCESS;
 
   0010e	33 c0		 xor	 eax, eax
 
-; 97   : }
+; 99   : }
 
   00110	48 83 c4 28	 add	 rsp, 40			; 00000028H
   00114	c3		 ret	 0

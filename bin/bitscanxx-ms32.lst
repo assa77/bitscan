@@ -37,6 +37,8 @@ $SG46997 DB	'_BSR64( %llu ): %u (Success=%u)', 0aH, 00H
 	ORG $+3
 $SG46998 DB	'_BSF64( %llu ): %u (Success=%u)', 0aH, 00H
 CONST	ENDS
+PUBLIC	__InlineBitScanForward64
+PUBLIC	__InlineBitScanReverse64
 PUBLIC	___local_stdio_printf_options
 PUBLIC	___local_stdio_scanf_options
 PUBLIC	__vfprintf_l
@@ -44,8 +46,6 @@ PUBLIC	??$__vcrt_va_start_verify_argument_type@QBD@@YAXXZ ; __vcrt_va_start_veri
 PUBLIC	_printf
 PUBLIC	__vfscanf_l
 PUBLIC	_scanf
-PUBLIC	__InlineBitScanForward64
-PUBLIC	__InlineBitScanReverse64
 PUBLIC	_main
 PUBLIC	?_OptionsStorage@?1??__local_stdio_printf_options@@9@4_KA ; `__local_stdio_printf_options'::`2'::_OptionsStorage
 PUBLIC	?_OptionsStorage@?1??__local_stdio_scanf_options@@9@4_KA ; `__local_stdio_scanf_options'::`2'::_OptionsStorage
@@ -69,16 +69,16 @@ _r$2 = -12						; size = 4
 _input$ = -8						; size = 8
 _main	PROC
 
-; 42   : {
+; 44   : {
 
   00000	83 ec 10	 sub	 esp, 16			; 00000010H
   00003	56		 push	 esi
 
-; 43   : 	unsigned long long input;
-; 44   : 	unsigned result;
-; 45   : 	unsigned status;
-; 46   : 
-; 47   : 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
+; 45   : 	unsigned long long input;
+; 46   : 	unsigned result;
+; 47   : 	unsigned status;
+; 48   : 
+; 49   : 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
   00004	6a 01		 push	 1
   00006	e8 00 00 00 00	 call	 ___acrt_iob_func
@@ -86,53 +86,53 @@ _main	PROC
   0000c	68 00 00 00 00	 push	 OFFSET $SG46984
   00011	e8 00 00 00 00	 call	 _fputs
 
-; 48   : 
-; 49   : 	PRINTM( __WORDSIZE );
+; 50   : 
+; 51   : 	PRINTM( __WORDSIZE );
 
   00016	6a 20		 push	 32			; 00000020H
   00018	68 00 00 00 00	 push	 OFFSET $SG46985
   0001d	68 00 00 00 00	 push	 OFFSET $SG46986
   00022	e8 00 00 00 00	 call	 _printf
 
-; 50   : 
-; 51   : #ifdef _IS_X86
-; 52   : 	PRINTM( _IS_X86 );
+; 52   : 
+; 53   : #ifdef _IS_X86
+; 54   : 	PRINTM( _IS_X86 );
 
   00027	6a 01		 push	 1
   00029	68 00 00 00 00	 push	 OFFSET $SG46987
   0002e	68 00 00 00 00	 push	 OFFSET $SG46988
   00033	e8 00 00 00 00	 call	 _printf
 
-; 53   : #endif
-; 54   : #ifdef _IS_386
-; 55   : 	PRINTM( _IS_386 );
+; 55   : #endif
+; 56   : #ifdef _IS_386
+; 57   : 	PRINTM( _IS_386 );
 
   00038	6a 01		 push	 1
   0003a	68 00 00 00 00	 push	 OFFSET $SG46989
   0003f	68 00 00 00 00	 push	 OFFSET $SG46990
   00044	e8 00 00 00 00	 call	 _printf
 
-; 56   : #endif
-; 57   : #ifdef _IS_X64
-; 58   : 	PRINTM( _IS_X64 );
-; 59   : #endif
-; 60   : #ifdef _IS_ARM
-; 61   : 	PRINTM( _IS_ARM );
-; 62   : #endif
-; 63   : #ifdef _IS_THUMB
-; 64   : 	PRINTM( _IS_THUMB );
-; 65   : #endif
-; 66   : #ifdef _IS_IN_THUMB
-; 67   : 	PRINTM( _IS_IN_THUMB );
-; 68   : #endif
-; 69   : #ifdef _IS_ARM64
-; 70   : 	PRINTM( _IS_ARM64 );
-; 71   : #endif
-; 72   : #ifdef _IS_NEON
-; 73   : 	PRINTM( _IS_NEON );
-; 74   : #endif
-; 75   : 
-; 76   : 	fputs( "\nInput unsigned integer> ", stdout );
+; 58   : #endif
+; 59   : #ifdef _IS_X64
+; 60   : 	PRINTM( _IS_X64 );
+; 61   : #endif
+; 62   : #ifdef _IS_ARM
+; 63   : 	PRINTM( _IS_ARM );
+; 64   : #endif
+; 65   : #ifdef _IS_THUMB
+; 66   : 	PRINTM( _IS_THUMB );
+; 67   : #endif
+; 68   : #ifdef _IS_IN_THUMB
+; 69   : 	PRINTM( _IS_IN_THUMB );
+; 70   : #endif
+; 71   : #ifdef _IS_ARM64
+; 72   : 	PRINTM( _IS_ARM64 );
+; 73   : #endif
+; 74   : #ifdef _IS_NEON
+; 75   : 	PRINTM( _IS_NEON );
+; 76   : #endif
+; 77   : 
+; 78   : 	fputs( "\nInput unsigned integer> ", stdout );
 
   00049	6a 01		 push	 1
   0004b	e8 00 00 00 00	 call	 ___acrt_iob_func
@@ -140,7 +140,7 @@ _main	PROC
   00051	68 00 00 00 00	 push	 OFFSET $SG46991
   00056	e8 00 00 00 00	 call	 _fputs
 
-; 77   : 	scanf( "%llu", &input );
+; 79   : 	scanf( "%llu", &input );
 
   0005b	8d 44 24 48	 lea	 eax, DWORD PTR _input$[esp+80]
   0005f	50		 push	 eax
@@ -148,15 +148,15 @@ _main	PROC
   00065	e8 00 00 00 00	 call	 _scanf
   0006a	83 c4 44	 add	 esp, 68			; 00000044H
 
-; 78   : 
-; 79   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
+; 80   : 
+; 81   : 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 
   0006d	ff 74 24 0c	 push	 DWORD PTR _input$[esp+20]
   00071	68 00 00 00 00	 push	 OFFSET $SG46993
   00076	e8 00 00 00 00	 call	 _printf
 
-; 80   : #ifdef _IS_BITSCANR32
-; 81   : 	status = _BSR32( &result, ( uint32_t )input );
+; 82   : #ifdef _IS_BITSCANR32
+; 83   : 	status = _BSR32( &result, ( uint32_t )input );
 
   0007b	8b 4c 24 14	 mov	 ecx, DWORD PTR _input$[esp+28]
   0007f	0f bd c1	 bsr	 eax, ecx
@@ -164,7 +164,7 @@ _main	PROC
   00086	0f 95 c0	 setne	 al
   00089	0f b6 c0	 movzx	 eax, al
 
-; 82   : 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+; 84   : 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
   0008c	50		 push	 eax
   0008d	ff 74 24 10	 push	 DWORD PTR _r$1[esp+32]
@@ -172,9 +172,9 @@ _main	PROC
   00092	68 00 00 00 00	 push	 OFFSET $SG46994
   00097	e8 00 00 00 00	 call	 _printf
 
-; 83   : #endif
-; 84   : #ifdef _IS_BITSCANF32
-; 85   : 	status = _BSF32( &result, ( uint32_t )input );
+; 85   : #endif
+; 86   : #ifdef _IS_BITSCANF32
+; 87   : 	status = _BSF32( &result, ( uint32_t )input );
 
   0009c	8b 4c 24 24	 mov	 ecx, DWORD PTR _input$[esp+44]
   000a0	0f bc c1	 bsf	 eax, ecx
@@ -182,7 +182,7 @@ _main	PROC
   000a7	0f 95 c0	 setne	 al
   000aa	0f b6 c0	 movzx	 eax, al
 
-; 86   : 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
+; 88   : 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
   000ad	50		 push	 eax
   000ae	ff 74 24 24	 push	 DWORD PTR _r$2[esp+48]
@@ -190,16 +190,16 @@ _main	PROC
   000b3	68 00 00 00 00	 push	 OFFSET $SG46995
   000b8	e8 00 00 00 00	 call	 _printf
 
-; 87   : #endif
-; 88   : #ifdef _IS_BITSCAN64
-; 89   : 	printf( "\n64-bit input value: %llu\n", input );
+; 89   : #endif
+; 90   : #ifdef _IS_BITSCAN64
+; 91   : 	printf( "\n64-bit input value: %llu\n", input );
 
   000bd	ff 74 24 38	 push	 DWORD PTR _input$[esp+64]
   000c1	ff 74 24 38	 push	 DWORD PTR _input$[esp+64]
   000c5	68 00 00 00 00	 push	 OFFSET $SG46996
   000ca	e8 00 00 00 00	 call	 _printf
 
-; 90   : 	status = _BSR64( &result, input );
+; 92   : 	status = _BSR64( &result, input );
 
   000cf	8b 74 24 44	 mov	 esi, DWORD PTR _input$[esp+76]
   000d3	83 c4 34	 add	 esp, 52			; 00000034H
@@ -215,7 +215,7 @@ $LN10@main:
   000f1	0f 95 c0	 setne	 al
 $LN11@main:
 
-; 91   : 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
+; 93   : 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
 
   000f4	50		 push	 eax
   000f5	51		 push	 ecx
@@ -224,7 +224,7 @@ $LN11@main:
   000f8	68 00 00 00 00	 push	 OFFSET $SG46997
   000fd	e8 00 00 00 00	 call	 _printf
 
-; 92   : 	status = _BSF64( &result, input );
+; 94   : 	status = _BSF64( &result, input );
 
   00102	8b 74 24 20	 mov	 esi, DWORD PTR _input$[esp+40]
   00106	83 c4 14	 add	 esp, 20			; 00000014H
@@ -241,7 +241,7 @@ $LN17@main:
   00121	33 c9		 xor	 ecx, ecx
 $LN15@main:
 
-; 93   : 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
+; 95   : 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
 
   00123	51		 push	 ecx
   00124	50		 push	 eax
@@ -251,274 +251,18 @@ $LN15@main:
   0012c	e8 00 00 00 00	 call	 _printf
   00131	83 c4 14	 add	 esp, 20			; 00000014H
 
-; 94   : #endif
-; 95   : 
-; 96   : 	return EXIT_SUCCESS;
+; 96   : #endif
+; 97   : 
+; 98   : 	return EXIT_SUCCESS;
 
   00134	33 c0		 xor	 eax, eax
   00136	5e		 pop	 esi
 
-; 97   : }
+; 99   : }
 
   00137	83 c4 10	 add	 esp, 16			; 00000010H
   0013a	c3		 ret	 0
 _main	ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File d:\work\bitscan\bitscan\bitscan.h
-_TEXT	SEGMENT
-_r$ = -4						; size = 4
-_i$ = 8							; size = 4
-_m$ = 12						; size = 8
-?_InlineBitScanReverse64@@YAEPAI_K@Z PROC		; _InlineBitScanReverse64
-
-; 1346 : {
-
-  00000	51		 push	 ecx
-
-; 1347 : 	register DWORD r;
-; 1348 : 	register const BOOLEAN s = _BSR64( &r, m );
-
-  00001	0f bd 44 24 10	 bsr	 eax, DWORD PTR _m$[esp+4]
-  00006	74 0f		 je	 SHORT $LN4@InlineBitS
-
-; 1349 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
-
-  00008	8b 4c 24 08	 mov	 ecx, DWORD PTR _i$[esp]
-  0000c	83 c0 20	 add	 eax, 32			; 00000020H
-  0000f	b2 01		 mov	 dl, 1
-  00011	89 01		 mov	 DWORD PTR [ecx], eax
-  00013	8a c2		 mov	 al, dl
-
-; 1350 : }
-
-  00015	59		 pop	 ecx
-  00016	c3		 ret	 0
-
-; 1347 : 	register DWORD r;
-; 1348 : 	register const BOOLEAN s = _BSR64( &r, m );
-
-$LN4@InlineBitS:
-  00017	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
-
-; 1349 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
-
-  0001c	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
-  00020	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
-  00023	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
-  00026	0f 95 c0	 setne	 al
-  00029	89 0a		 mov	 DWORD PTR [edx], ecx
-
-; 1350 : }
-
-  0002b	59		 pop	 ecx
-  0002c	c3		 ret	 0
-?_InlineBitScanReverse64@@YAEPAI_K@Z ENDP		; _InlineBitScanReverse64
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File d:\work\bitscan\bitscan\bitscan.h
-_TEXT	SEGMENT
-_i$ = 8							; size = 4
-_m$ = 12						; size = 8
-?_InlineBitScanForward64@@YAEPAI_K@Z PROC		; _InlineBitScanForward64
-
-; 1339 : 	register DWORD r;
-; 1340 : 	register const BOOLEAN s = _BSF64( &r, m );
-
-  00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _m$[esp-4]
-  00005	75 0a		 jne	 SHORT $LN8@InlineBitS
-  00007	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _m$[esp]
-  0000c	74 0e		 je	 SHORT $LN5@InlineBitS
-  0000e	83 c0 20	 add	 eax, 32			; 00000020H
-$LN8@InlineBitS:
-
-; 1341 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
-
-  00011	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
-  00015	b2 01		 mov	 dl, 1
-  00017	89 01		 mov	 DWORD PTR [ecx], eax
-  00019	8a c2		 mov	 al, dl
-
-; 1342 : }
-
-  0001b	c3		 ret	 0
-
-; 1339 : 	register DWORD r;
-; 1340 : 	register const BOOLEAN s = _BSF64( &r, m );
-
-$LN5@InlineBitS:
-
-; 1341 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
-
-  0001c	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
-  00020	32 d2		 xor	 dl, dl
-  00022	89 01		 mov	 DWORD PTR [ecx], eax
-  00024	8a c2		 mov	 al, dl
-
-; 1342 : }
-
-  00026	c3		 ret	 0
-?_InlineBitScanForward64@@YAEPAI_K@Z ENDP		; _InlineBitScanForward64
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
-;	COMDAT __InlineBitScanReverse64
-_TEXT	SEGMENT
-_Index$ = 8						; size = 4
-_Mask$ = 12						; size = 8
-__InlineBitScanReverse64 PROC				; COMDAT
-
-; 6354 :     if (_BitScanReverse(Index, (DWORD)(Mask >> 32))) {
-
-  00000	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _Mask$[esp]
-  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
-  00009	89 01		 mov	 DWORD PTR [ecx], eax
-  0000b	74 06		 je	 SHORT $LN2@InlineBitS
-
-; 6355 :         *Index += 32;
-
-  0000d	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
-
-; 6356 :         return 1;
-
-  00010	b0 01		 mov	 al, 1
-
-; 6360 :         return 1;
-; 6361 :     }
-; 6362 : 
-; 6363 :     return 0;
-; 6364 : }
-
-  00012	c3		 ret	 0
-$LN2@InlineBitS:
-
-; 6357 :     }
-; 6358 : 
-; 6359 :     if (_BitScanReverse(Index, (DWORD)Mask)) {
-
-  00013	0f bd 44 24 08	 bsr	 eax, DWORD PTR _Mask$[esp-4]
-  00018	89 01		 mov	 DWORD PTR [ecx], eax
-  0001a	0f 95 c0	 setne	 al
-
-; 6360 :         return 1;
-; 6361 :     }
-; 6362 : 
-; 6363 :     return 0;
-; 6364 : }
-
-  0001d	c3		 ret	 0
-__InlineBitScanReverse64 ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
-;	COMDAT __InlineBitScanForward64
-_TEXT	SEGMENT
-_Index$ = 8						; size = 4
-_Mask$ = 12						; size = 8
-__InlineBitScanForward64 PROC				; COMDAT
-
-; 6332 :     if (_BitScanForward(Index, (DWORD)Mask)) {
-
-  00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _Mask$[esp-4]
-  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
-  00009	89 01		 mov	 DWORD PTR [ecx], eax
-  0000b	75 0c		 jne	 SHORT $LN5@InlineBitS
-
-; 6333 :         return 1;
-; 6334 :     }
-; 6335 : 
-; 6336 :     if (_BitScanForward(Index, (DWORD)(Mask >> 32))) {
-
-  0000d	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _Mask$[esp]
-  00012	89 01		 mov	 DWORD PTR [ecx], eax
-  00014	74 06		 je	 SHORT $LN3@InlineBitS
-
-; 6337 :         *Index += 32;
-
-  00016	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
-$LN5@InlineBitS:
-
-; 6338 :         return 1;
-
-  00019	b0 01		 mov	 al, 1
-
-; 6342 : }
-
-  0001b	c3		 ret	 0
-$LN3@InlineBitS:
-
-; 6339 :     }
-; 6340 : 
-; 6341 :     return 0;
-
-  0001c	32 c0		 xor	 al, al
-
-; 6342 : }
-
-  0001e	c3		 ret	 0
-__InlineBitScanForward64 ENDP
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File d:\work\bitscan\bitscan\bitscan.h
-_TEXT	SEGMENT
-_r$ = -4						; size = 4
-_i$ = 8							; size = 4
-_m$ = 12						; size = 4
-?_BitScanReverse@@YAEPAII@Z PROC			; _BitScanReverse
-
-; 824  : {
-
-  00000	51		 push	 ecx
-
-; 825  : 	register unsigned long r;
-; 826  : 	register const unsigned char s = _BSR32( &r, m );
-
-  00001	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
-
-; 827  : 	return *i = static_cast< bsint_t >( r ), s;
-
-  00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
-  0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
-  0000d	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
-  00010	0f 95 c0	 setne	 al
-  00013	89 0a		 mov	 DWORD PTR [edx], ecx
-
-; 828  : }
-
-  00015	59		 pop	 ecx
-  00016	c3		 ret	 0
-?_BitScanReverse@@YAEPAII@Z ENDP			; _BitScanReverse
-_TEXT	ENDS
-; Function compile flags: /Ogtpy
-; File d:\work\bitscan\bitscan\bitscan.h
-_TEXT	SEGMENT
-_r$ = -4						; size = 4
-_i$ = 8							; size = 4
-_m$ = 12						; size = 4
-?_BitScanForward@@YAEPAII@Z PROC			; _BitScanForward
-
-; 816  : {
-
-  00000	51		 push	 ecx
-
-; 817  : 	register unsigned long r;
-; 818  : 	register const unsigned char s = _BSF32( &r, m );
-
-  00001	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _m$[esp]
-
-; 819  : 	return *i = static_cast< bsint_t >( r ), s;
-
-  00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
-  0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
-  0000d	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
-  00010	0f 95 c0	 setne	 al
-  00013	89 0a		 mov	 DWORD PTR [edx], ecx
-
-; 820  : }
-
-  00015	59		 pop	 ecx
-  00016	c3		 ret	 0
-?_BitScanForward@@YAEPAII@Z ENDP			; _BitScanForward
 _TEXT	ENDS
 ; Function compile flags: /Ogtpy
 ; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\ucrt\stdio.h
@@ -697,5 +441,261 @@ ___local_stdio_printf_options PROC			; COMDAT
 
   00005	c3		 ret	 0
 ___local_stdio_printf_options ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File d:\work\bitscan\bitscan\bitscan.h
+_TEXT	SEGMENT
+_r$ = -4						; size = 4
+_i$ = 8							; size = 4
+_m$ = 12						; size = 8
+?_InlineBitScanReverse64@@YAEPAI_K@Z PROC		; _InlineBitScanReverse64
+
+; 1352 : {
+
+  00000	51		 push	 ecx
+
+; 1353 : 	register DWORD r;
+; 1354 : 	register const BOOLEAN s = _BSR64( &r, m );
+
+  00001	0f bd 44 24 10	 bsr	 eax, DWORD PTR _m$[esp+4]
+  00006	74 0f		 je	 SHORT $LN4@InlineBitS
+
+; 1355 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+
+  00008	8b 4c 24 08	 mov	 ecx, DWORD PTR _i$[esp]
+  0000c	83 c0 20	 add	 eax, 32			; 00000020H
+  0000f	b2 01		 mov	 dl, 1
+  00011	89 01		 mov	 DWORD PTR [ecx], eax
+  00013	8a c2		 mov	 al, dl
+
+; 1356 : }
+
+  00015	59		 pop	 ecx
+  00016	c3		 ret	 0
+
+; 1353 : 	register DWORD r;
+; 1354 : 	register const BOOLEAN s = _BSR64( &r, m );
+
+$LN4@InlineBitS:
+  00017	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
+
+; 1355 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+
+  0001c	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
+  00020	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
+  00023	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
+  00026	0f 95 c0	 setne	 al
+  00029	89 0a		 mov	 DWORD PTR [edx], ecx
+
+; 1356 : }
+
+  0002b	59		 pop	 ecx
+  0002c	c3		 ret	 0
+?_InlineBitScanReverse64@@YAEPAI_K@Z ENDP		; _InlineBitScanReverse64
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File d:\work\bitscan\bitscan\bitscan.h
+_TEXT	SEGMENT
+_i$ = 8							; size = 4
+_m$ = 12						; size = 8
+?_InlineBitScanForward64@@YAEPAI_K@Z PROC		; _InlineBitScanForward64
+
+; 1345 : 	register DWORD r;
+; 1346 : 	register const BOOLEAN s = _BSF64( &r, m );
+
+  00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _m$[esp-4]
+  00005	75 0a		 jne	 SHORT $LN8@InlineBitS
+  00007	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _m$[esp]
+  0000c	74 0e		 je	 SHORT $LN5@InlineBitS
+  0000e	83 c0 20	 add	 eax, 32			; 00000020H
+$LN8@InlineBitS:
+
+; 1347 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+
+  00011	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
+  00015	b2 01		 mov	 dl, 1
+  00017	89 01		 mov	 DWORD PTR [ecx], eax
+  00019	8a c2		 mov	 al, dl
+
+; 1348 : }
+
+  0001b	c3		 ret	 0
+
+; 1345 : 	register DWORD r;
+; 1346 : 	register const BOOLEAN s = _BSF64( &r, m );
+
+$LN5@InlineBitS:
+
+; 1347 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+
+  0001c	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
+  00020	32 d2		 xor	 dl, dl
+  00022	89 01		 mov	 DWORD PTR [ecx], eax
+  00024	8a c2		 mov	 al, dl
+
+; 1348 : }
+
+  00026	c3		 ret	 0
+?_InlineBitScanForward64@@YAEPAI_K@Z ENDP		; _InlineBitScanForward64
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
+;	COMDAT __InlineBitScanReverse64
+_TEXT	SEGMENT
+_Index$ = 8						; size = 4
+_Mask$ = 12						; size = 8
+__InlineBitScanReverse64 PROC				; COMDAT
+
+; 6354 :     if (_BitScanReverse(Index, (DWORD)(Mask >> 32))) {
+
+  00000	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _Mask$[esp]
+  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
+  00009	89 01		 mov	 DWORD PTR [ecx], eax
+  0000b	74 06		 je	 SHORT $LN2@InlineBitS
+
+; 6355 :         *Index += 32;
+
+  0000d	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
+
+; 6356 :         return 1;
+
+  00010	b0 01		 mov	 al, 1
+
+; 6360 :         return 1;
+; 6361 :     }
+; 6362 : 
+; 6363 :     return 0;
+; 6364 : }
+
+  00012	c3		 ret	 0
+$LN2@InlineBitS:
+
+; 6357 :     }
+; 6358 : 
+; 6359 :     if (_BitScanReverse(Index, (DWORD)Mask)) {
+
+  00013	0f bd 44 24 08	 bsr	 eax, DWORD PTR _Mask$[esp-4]
+  00018	89 01		 mov	 DWORD PTR [ecx], eax
+  0001a	0f 95 c0	 setne	 al
+
+; 6360 :         return 1;
+; 6361 :     }
+; 6362 : 
+; 6363 :     return 0;
+; 6364 : }
+
+  0001d	c3		 ret	 0
+__InlineBitScanReverse64 ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File c:\program files (x86)\windows kits\10\include\10.0.14393.0\um\winnt.h
+;	COMDAT __InlineBitScanForward64
+_TEXT	SEGMENT
+_Index$ = 8						; size = 4
+_Mask$ = 12						; size = 8
+__InlineBitScanForward64 PROC				; COMDAT
+
+; 6332 :     if (_BitScanForward(Index, (DWORD)Mask)) {
+
+  00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _Mask$[esp-4]
+  00005	8b 4c 24 04	 mov	 ecx, DWORD PTR _Index$[esp-4]
+  00009	89 01		 mov	 DWORD PTR [ecx], eax
+  0000b	75 0c		 jne	 SHORT $LN5@InlineBitS
+
+; 6333 :         return 1;
+; 6334 :     }
+; 6335 : 
+; 6336 :     if (_BitScanForward(Index, (DWORD)(Mask >> 32))) {
+
+  0000d	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _Mask$[esp]
+  00012	89 01		 mov	 DWORD PTR [ecx], eax
+  00014	74 06		 je	 SHORT $LN3@InlineBitS
+
+; 6337 :         *Index += 32;
+
+  00016	83 01 20	 add	 DWORD PTR [ecx], 32	; 00000020H
+$LN5@InlineBitS:
+
+; 6338 :         return 1;
+
+  00019	b0 01		 mov	 al, 1
+
+; 6342 : }
+
+  0001b	c3		 ret	 0
+$LN3@InlineBitS:
+
+; 6339 :     }
+; 6340 : 
+; 6341 :     return 0;
+
+  0001c	32 c0		 xor	 al, al
+
+; 6342 : }
+
+  0001e	c3		 ret	 0
+__InlineBitScanForward64 ENDP
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File d:\work\bitscan\bitscan\bitscan.h
+_TEXT	SEGMENT
+_r$ = -4						; size = 4
+_i$ = 8							; size = 4
+_m$ = 12						; size = 4
+?_BitScanReverse@@YAEPAII@Z PROC			; _BitScanReverse
+
+; 830  : {
+
+  00000	51		 push	 ecx
+
+; 831  : 	register unsigned long r;
+; 832  : 	register const unsigned char s = _BSR32( &r, m );
+
+  00001	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
+
+; 833  : 	return *i = static_cast< bsint_t >( r ), s;
+
+  00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
+  0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
+  0000d	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
+  00010	0f 95 c0	 setne	 al
+  00013	89 0a		 mov	 DWORD PTR [edx], ecx
+
+; 834  : }
+
+  00015	59		 pop	 ecx
+  00016	c3		 ret	 0
+?_BitScanReverse@@YAEPAII@Z ENDP			; _BitScanReverse
+_TEXT	ENDS
+; Function compile flags: /Ogtpy
+; File d:\work\bitscan\bitscan\bitscan.h
+_TEXT	SEGMENT
+_r$ = -4						; size = 4
+_i$ = 8							; size = 4
+_m$ = 12						; size = 4
+?_BitScanForward@@YAEPAII@Z PROC			; _BitScanForward
+
+; 822  : {
+
+  00000	51		 push	 ecx
+
+; 823  : 	register unsigned long r;
+; 824  : 	register const unsigned char s = _BSF32( &r, m );
+
+  00001	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _m$[esp]
+
+; 825  : 	return *i = static_cast< bsint_t >( r ), s;
+
+  00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
+  0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
+  0000d	8b 0c 24	 mov	 ecx, DWORD PTR _r$[esp+4]
+  00010	0f 95 c0	 setne	 al
+  00013	89 0a		 mov	 DWORD PTR [edx], ecx
+
+; 826  : }
+
+  00015	59		 pop	 ecx
+  00016	c3		 ret	 0
+?_BitScanForward@@YAEPAII@Z ENDP			; _BitScanForward
 _TEXT	ENDS
 END

@@ -160,6 +160,8 @@
 #  define __INTEL_COMPILER	__ICL
 # elif defined( __ICL__ )
 #  define __INTEL_COMPILER	__ICL__
+# elif defined( __ICC )
+#  define __INTEL_COMPILER	__ICC
 # endif
 #endif
 
@@ -169,6 +171,10 @@
 
 #if defined( __INTEL_COMPILER ) && !defined( __ICL__ )
 # define __ICL__		__INTEL_COMPILER
+#endif
+
+#if defined( __INTEL_COMPILER ) && !defined( __ICC )
+# define __ICC			__INTEL_COMPILER
 #endif
 
 #if defined( __CYGWIN64__ ) && !defined( __CYGWIN__ )
