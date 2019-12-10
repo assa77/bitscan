@@ -450,17 +450,17 @@ _i$ = 8							; size = 4
 _m$ = 12						; size = 8
 ?_InlineBitScanReverse64@@YAEPAI_K@Z PROC		; _InlineBitScanReverse64
 
-; 1352 : {
+; 1371 : {
 
   00000	51		 push	 ecx
 
-; 1353 : 	register DWORD r;
-; 1354 : 	register const BOOLEAN s = _BSR64( &r, m );
+; 1372 : 	register DWORD r;
+; 1373 : 	register const BOOLEAN s = _BSR64( &r, m );
 
   00001	0f bd 44 24 10	 bsr	 eax, DWORD PTR _m$[esp+4]
   00006	74 0f		 je	 SHORT $LN4@InlineBitS
 
-; 1355 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+; 1374 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
 
   00008	8b 4c 24 08	 mov	 ecx, DWORD PTR _i$[esp]
   0000c	83 c0 20	 add	 eax, 32			; 00000020H
@@ -468,18 +468,18 @@ _m$ = 12						; size = 8
   00011	89 01		 mov	 DWORD PTR [ecx], eax
   00013	8a c2		 mov	 al, dl
 
-; 1356 : }
+; 1375 : }
 
   00015	59		 pop	 ecx
   00016	c3		 ret	 0
 
-; 1353 : 	register DWORD r;
-; 1354 : 	register const BOOLEAN s = _BSR64( &r, m );
+; 1372 : 	register DWORD r;
+; 1373 : 	register const BOOLEAN s = _BSR64( &r, m );
 
 $LN4@InlineBitS:
   00017	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
 
-; 1355 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+; 1374 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
 
   0001c	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
   00020	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
@@ -487,7 +487,7 @@ $LN4@InlineBitS:
   00026	0f 95 c0	 setne	 al
   00029	89 0a		 mov	 DWORD PTR [edx], ecx
 
-; 1356 : }
+; 1375 : }
 
   0002b	59		 pop	 ecx
   0002c	c3		 ret	 0
@@ -500,8 +500,8 @@ _i$ = 8							; size = 4
 _m$ = 12						; size = 8
 ?_InlineBitScanForward64@@YAEPAI_K@Z PROC		; _InlineBitScanForward64
 
-; 1345 : 	register DWORD r;
-; 1346 : 	register const BOOLEAN s = _BSF64( &r, m );
+; 1364 : 	register DWORD r;
+; 1365 : 	register const BOOLEAN s = _BSF64( &r, m );
 
   00000	0f bc 44 24 08	 bsf	 eax, DWORD PTR _m$[esp-4]
   00005	75 0a		 jne	 SHORT $LN8@InlineBitS
@@ -510,30 +510,30 @@ _m$ = 12						; size = 8
   0000e	83 c0 20	 add	 eax, 32			; 00000020H
 $LN8@InlineBitS:
 
-; 1347 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+; 1366 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
 
   00011	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
   00015	b2 01		 mov	 dl, 1
   00017	89 01		 mov	 DWORD PTR [ecx], eax
   00019	8a c2		 mov	 al, dl
 
-; 1348 : }
+; 1367 : }
 
   0001b	c3		 ret	 0
 
-; 1345 : 	register DWORD r;
-; 1346 : 	register const BOOLEAN s = _BSF64( &r, m );
+; 1364 : 	register DWORD r;
+; 1365 : 	register const BOOLEAN s = _BSF64( &r, m );
 
 $LN5@InlineBitS:
 
-; 1347 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
+; 1366 : 	return *i = static_cast< bsint_t >( r ), static_cast< unsigned char >( s );
 
   0001c	8b 4c 24 04	 mov	 ecx, DWORD PTR _i$[esp-4]
   00020	32 d2		 xor	 dl, dl
   00022	89 01		 mov	 DWORD PTR [ecx], eax
   00024	8a c2		 mov	 al, dl
 
-; 1348 : }
+; 1367 : }
 
   00026	c3		 ret	 0
 ?_InlineBitScanForward64@@YAEPAI_K@Z ENDP		; _InlineBitScanForward64
@@ -644,16 +644,16 @@ _i$ = 8							; size = 4
 _m$ = 12						; size = 4
 ?_BitScanReverse@@YAEPAII@Z PROC			; _BitScanReverse
 
-; 830  : {
+; 846  : {
 
   00000	51		 push	 ecx
 
-; 831  : 	register unsigned long r;
-; 832  : 	register const unsigned char s = _BSR32( &r, m );
+; 847  : 	register unsigned long r;
+; 848  : 	register const unsigned char s = _BSR32( &r, m );
 
   00001	0f bd 44 24 0c	 bsr	 eax, DWORD PTR _m$[esp]
 
-; 833  : 	return *i = static_cast< bsint_t >( r ), s;
+; 849  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
   0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
@@ -661,7 +661,7 @@ _m$ = 12						; size = 4
   00010	0f 95 c0	 setne	 al
   00013	89 0a		 mov	 DWORD PTR [edx], ecx
 
-; 834  : }
+; 850  : }
 
   00015	59		 pop	 ecx
   00016	c3		 ret	 0
@@ -675,16 +675,16 @@ _i$ = 8							; size = 4
 _m$ = 12						; size = 4
 ?_BitScanForward@@YAEPAII@Z PROC			; _BitScanForward
 
-; 822  : {
+; 838  : {
 
   00000	51		 push	 ecx
 
-; 823  : 	register unsigned long r;
-; 824  : 	register const unsigned char s = _BSF32( &r, m );
+; 839  : 	register unsigned long r;
+; 840  : 	register const unsigned char s = _BSF32( &r, m );
 
   00001	0f bc 44 24 0c	 bsf	 eax, DWORD PTR _m$[esp]
 
-; 825  : 	return *i = static_cast< bsint_t >( r ), s;
+; 841  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00006	8b 54 24 08	 mov	 edx, DWORD PTR _i$[esp]
   0000a	89 04 24	 mov	 DWORD PTR _r$[esp+4], eax
@@ -692,7 +692,7 @@ _m$ = 12						; size = 4
   00010	0f 95 c0	 setne	 al
   00013	89 0a		 mov	 DWORD PTR [edx], ecx
 
-; 826  : }
+; 842  : }
 
   00015	59		 pop	 ecx
   00016	c3		 ret	 0

@@ -1,6 +1,6 @@
 ; mark_description "Intel(R) C++ Intel(R) 64 Compiler for applications running on IA-32, Version 16.0.4.246 Build 20160811";
-; mark_description "-Qm32 -O3 -Ot -Qm32 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 -obin\\bitscanxx-32.exe -Fabin\\bitscanxx-32.ls";
-; mark_description "t -FAcs";
+; mark_description "-Qm32 -O3 -Ot -Oi -Qm32 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 -obin\\bitscanxx-32.exe -Fabin\\bitscanxx-3";
+; mark_description "2.lst -FAcs";
 	.686P
  	.387
 	OPTION DOTNAME
@@ -49,18 +49,18 @@ L1::
   00008 81 ec 78 01 00 
         00               sub esp, 376                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
   0000e 6a 00            push 0                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
-  00010 68 fe 17 01 00   push 71678                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
+  00010 68 fe 03 00 00   push 1022                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
   00015 6a 03            push 3                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
   00017 e8 fc ff ff ff   call ___intel_new_feature_proc_init    ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
                                 ; LOE ebx
 .B1.35:                         ; Preds .B1.1
-  0001c c5 f8 ae 9c 24 
-        8c 00 00 00      vstmxcsr DWORD PTR [140+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
-  00025 81 8c 24 8c 00 
+  0001c 0f ae 9c 24 8c 
+        00 00 00         stmxcsr DWORD PTR [140+esp]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
+  00024 81 8c 24 8c 00 
         00 00 40 80 00 
         00               or DWORD PTR [140+esp], 32832          ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
-  00030 c5 f8 ae 94 24 
-        8c 00 00 00      vldmxcsr DWORD PTR [140+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
+  0002f 0f ae 94 24 8c 
+        00 00 00         ldmxcsr DWORD PTR [140+esp]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:44.1
 
 ;;; 	unsigned long long input;
 ;;; 	unsigned result;
@@ -68,14 +68,14 @@ L1::
 ;;; 
 ;;; 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
-  00039 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.110
-  0003b e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00037 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.110
+  00039 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.110
                                 ; LOE eax ebx
 .B1.2:                          ; Preds .B1.35
-  00040 50               push eax                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.2
-  00041 68 00 00 00 00   push OFFSET FLAT: ??_C@_0FO@A@?6BitScan?5?9?5Copyright?5?$CIc?$CJ?52019?5by?5Alexander?5M?4?5Albertian?5?$DMassa?$EA4ip?4ru?$DO?4?6All?5rights?5reserved?4?6?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.2
-  00046 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
+  0003e 50               push eax                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.2
+  0003f 68 00 00 00 00   push OFFSET FLAT: ??_C@_0FO@A@?6BitScan?5?9?5Copyright?5?$CIc?$CJ?52019?5by?5Alexander?5M?4?5Albertian?5?$DMassa?$EA4ip?4ru?$DO?4?6All?5rights?5reserved?4?6?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.2
+  00044 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
         call      _fputs                                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:49.2
                                 ; LOE ebx
 .B1.3:                          ; Preds .B1.2
@@ -83,39 +83,39 @@ L1::
 ;;; 
 ;;; 	PRINTM( __WORDSIZE );
 
-  0004b c7 84 24 e0 00 
+  00049 c7 84 24 e0 00 
         00 00 00 00 00 
         00               mov DWORD PTR [224+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00056 c7 84 24 e4 00 
+  00054 c7 84 24 e4 00 
         00 00 00 00 00 
         00               mov DWORD PTR [228+esp], OFFSET FLAT: ??_C@_0L@A@__WORDSIZE?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00061 c7 84 24 e8 00 
+  0005f c7 84 24 e8 00 
         00 00 20 00 00 
         00               mov DWORD PTR [232+esp], 32            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  0006c 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  0006e e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  0006a 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  0006c e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
                                 ; LOE eax ebx
 .B1.36:                         ; Preds .B1.3
-  00073 8b f0            mov esi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00075 83 c4 1c         add esp, 28                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  00071 8b f0            mov esi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  00073 83 c4 1c         add esp, 28                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
                                 ; LOE ebx esi
 .B1.4:                          ; Preds .B1.36
-  00078 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  00076 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
                                 ; LOE eax ebx esi
 .B1.37:                         ; Preds .B1.4
-  0007d 8d 94 24 cc 00 
+  0007b 8d 94 24 cc 00 
         00 00            lea edx, DWORD PTR [204+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00084 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00088 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  0008d 89 74 24 08      mov DWORD PTR [8+esp], esi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00091 c7 44 24 0c 00 
+  00082 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  00086 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  0008b 89 74 24 08      mov DWORD PTR [8+esp], esi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  0008f c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  00099 c7 44 24 10 00 
+  00097 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  000a1 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
-  000a5 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  0009f 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
+  000a3 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:51.2
                                 ; LOE ebx
 .B1.5:                          ; Preds .B1.37
@@ -124,39 +124,39 @@ L1::
 ;;; #ifdef _IS_X86
 ;;; 	PRINTM( _IS_X86 );
 
-  000aa be 01 00 00 00   mov esi, 1                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000af c7 84 24 d4 00 
+  000a8 be 01 00 00 00   mov esi, 1                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000ad c7 84 24 d4 00 
         00 00 00 00 00 
         00               mov DWORD PTR [212+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000ba c7 84 24 d8 00 
+  000b8 c7 84 24 d8 00 
         00 00 00 00 00 
         00               mov DWORD PTR [216+esp], OFFSET FLAT: ??_C@_07A@_IS_X86?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000c5 89 b4 24 dc 00 
+  000c3 89 b4 24 dc 00 
         00 00            mov DWORD PTR [220+esp], esi           ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000cc 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000cd e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  000ca 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000cb e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
                                 ; LOE eax ebx esi
 .B1.38:                         ; Preds .B1.5
-  000d2 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000d4 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000d0 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000d2 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
                                 ; LOE ebx esi edi
 .B1.6:                          ; Preds .B1.38
-  000d7 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  000d5 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
                                 ; LOE eax ebx esi edi
 .B1.39:                         ; Preds .B1.6
-  000dc 8d 94 24 d8 00 
+  000da 8d 94 24 d8 00 
         00 00            lea edx, DWORD PTR [216+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000e3 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000e7 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000ec 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000f0 c7 44 24 0c 00 
+  000e1 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000e5 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000ea 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  000ee c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  000f8 c7 44 24 10 00 
+  000f6 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  00100 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
-  00104 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  000fe 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
+  00102 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:54.2
                                 ; LOE ebx esi
 .B1.7:                          ; Preds .B1.39
@@ -165,38 +165,38 @@ L1::
 ;;; #ifdef _IS_386
 ;;; 	PRINTM( _IS_386 );
 
-  00109 c7 84 24 e0 00 
+  00107 c7 84 24 e0 00 
         00 00 00 00 00 
         00               mov DWORD PTR [224+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00114 c7 84 24 e4 00 
+  00112 c7 84 24 e4 00 
         00 00 00 00 00 
         00               mov DWORD PTR [228+esp], OFFSET FLAT: ??_C@_07A@_IS_386?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0011f 89 b4 24 e8 00 
+  0011d 89 b4 24 e8 00 
         00 00            mov DWORD PTR [232+esp], esi           ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00126 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00127 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00124 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  00125 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
                                 ; LOE eax ebx esi
 .B1.40:                         ; Preds .B1.7
-  0012c 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0012e 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  0012a 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  0012c 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
                                 ; LOE ebx esi edi
 .B1.8:                          ; Preds .B1.40
-  00131 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  0012f e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
                                 ; LOE eax ebx esi edi
 .B1.41:                         ; Preds .B1.8
-  00136 8d 94 24 e4 00 
+  00134 8d 94 24 e4 00 
         00 00            lea edx, DWORD PTR [228+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0013d c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00141 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00146 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0014a c7 44 24 0c 00 
+  0013b f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  0013f 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  00144 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  00148 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  00152 c7 44 24 10 00 
+  00150 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0015a 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
-  0015e e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  00158 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
+  0015c e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:57.2
                                 ; LOE ebx esi
 .B1.9:                          ; Preds .B1.41
@@ -223,50 +223,50 @@ L1::
 ;;; 
 ;;; 	fputs( "\nInput unsigned integer> ", stdout );
 
-  00163 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.39
-  00165 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00161 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.39
+  00163 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.39
                                 ; LOE eax ebx esi
 .B1.10:                         ; Preds .B1.9
-  0016a 50               push eax                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.2
-  0016b 68 00 00 00 00   push OFFSET FLAT: ??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.2
-  00170 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
+  00168 50               push eax                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.2
+  00169 68 00 00 00 00   push OFFSET FLAT: ??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.2
+  0016e e8 fc ff ff ff  ;       fputs(const char *, FILE *)
         call      _fputs                                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:78.2
                                 ; LOE ebx esi
 .B1.11:                         ; Preds .B1.10
 
 ;;; 	scanf( "%llu", &input );
 
-  00175 c7 84 24 04 01 
+  00173 c7 84 24 04 01 
         00 00 00 00 00 
         00               mov DWORD PTR [260+esp], OFFSET FLAT: ??_C@_04A@?$CFllu?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  00180 8d 84 24 14 01 
+  0017e 8d 84 24 14 01 
         00 00            lea eax, DWORD PTR [276+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.18
-  00187 89 40 f4         mov DWORD PTR [-12+eax], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  0018a 6a 00            push 0                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  0018c e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00185 89 40 f4         mov DWORD PTR [-12+eax], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  00188 6a 00            push 0                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  0018a e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
                                 ; LOE eax ebx esi
 .B1.43:                         ; Preds .B1.11
-  00191 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  00193 83 c4 10         add esp, 16                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  0018f 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  00191 83 c4 10         add esp, 16                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
                                 ; LOE ebx esi edi
 .B1.12:                         ; Preds .B1.43
-  00196 e8 fc ff ff ff  ;       __local_stdio_scanf_options()
+  00194 e8 fc ff ff ff  ;       __local_stdio_scanf_options()
         call      ___local_stdio_scanf_options                  ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
                                 ; LOE eax ebx esi edi
 .B1.44:                         ; Preds .B1.12
-  0019b 8d 94 24 fc 00 
+  00199 8d 94 24 fc 00 
         00 00            lea edx, DWORD PTR [252+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001a2 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001a6 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001ab 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001af c7 44 24 0c 00 
+  001a0 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  001a4 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  001a9 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  001ad c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_04A@?$CFllu?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001b7 c7 44 24 10 00 
+  001b5 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001bf 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
-  001c3 e8 fc ff ff ff  ;       __stdio_common_vfscanf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  001bd 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
+  001c1 e8 fc ff ff ff  ;       __stdio_common_vfscanf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfscanf                       ;D:\WORK\bitscan\bitscan\bitscan.cpp:79.2
                                 ; LOE ebx esi
 .B1.13:                         ; Preds .B1.44
@@ -274,37 +274,37 @@ L1::
 ;;; 
 ;;; 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 
-  001c8 8b 84 24 08 01 
+  001c6 8b 84 24 08 01 
         00 00            mov eax, DWORD PTR [264+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.70
-  001cf c7 84 24 00 01 
+  001cd c7 84 24 00 01 
         00 00 00 00 00 
         00               mov DWORD PTR [256+esp], OFFSET FLAT: ??_C@_0BK@A@?632?9bit?5input?5value?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001da 89 84 24 04 01 
+  001d8 89 84 24 04 01 
         00 00            mov DWORD PTR [260+esp], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001e1 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001e3 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  001df 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  001e1 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
                                 ; LOE eax ebx esi
 .B1.45:                         ; Preds .B1.13
-  001e8 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001ea 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  001e6 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  001e8 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
                                 ; LOE ebx esi edi
 .B1.14:                         ; Preds .B1.45
-  001ed e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  001eb e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
                                 ; LOE eax ebx esi edi
 .B1.46:                         ; Preds .B1.14
-  001f2 8d 94 24 04 01 
+  001f0 8d 94 24 04 01 
         00 00            lea edx, DWORD PTR [260+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001f9 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  001fd c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  00202 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  00206 c7 44 24 0c 00 
+  001f7 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  001fb 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  00200 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  00204 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0BK@A@?632?9bit?5input?5value?3?5?$CFlu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  0020e c7 44 24 10 00 
+  0020c c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  00216 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
-  0021a e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  00214 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
+  00218 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:81.2
                                 ; LOE ebx esi
 .B1.15:                         ; Preds .B1.46
@@ -312,48 +312,48 @@ L1::
 ;;; #ifdef _IS_BITSCANR32
 ;;; 	status = _BSR32( &result, ( uint32_t )input );
 
-  0021f 8b 84 24 08 01 
+  0021d 8b 84 24 08 01 
         00 00            mov eax, DWORD PTR [264+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
-  00226 33 c9            xor ecx, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
-  00228 0f bd d0         bsr edx, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
-  0022b 8b fe            mov edi, esi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
-  0022d 0f 44 f9         cmove edi, ecx                         ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
+  00224 33 c9            xor ecx, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
+  00226 0f bd d0         bsr edx, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
+  00229 8b fe            mov edi, esi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
+  0022b 0f 44 f9         cmove edi, ecx                         ;D:\WORK\bitscan\bitscan\bitscan.cpp:83.11
 
 ;;; 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
-  00230 c7 84 24 a8 00 
+  0022e c7 84 24 a8 00 
         00 00 00 00 00 
         00               mov DWORD PTR [168+esp], OFFSET FLAT: ??_C@_0CA@A@_BSR32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  0023b 89 84 24 ac 00 
+  00239 89 84 24 ac 00 
         00 00            mov DWORD PTR [172+esp], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00242 89 94 24 b0 00 
+  00240 89 94 24 b0 00 
         00 00            mov DWORD PTR [176+esp], edx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00249 89 bc 24 b4 00 
+  00247 89 bc 24 b4 00 
         00 00            mov DWORD PTR [180+esp], edi           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00250 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00251 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  0024e 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  0024f e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
                                 ; LOE eax ebx esi
 .B1.47:                         ; Preds .B1.15
-  00256 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00258 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  00254 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  00256 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
                                 ; LOE ebx esi edi
 .B1.16:                         ; Preds .B1.47
-  0025b e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  00259 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
                                 ; LOE eax ebx esi edi
 .B1.48:                         ; Preds .B1.16
-  00260 8d 94 24 ac 00 
+  0025e 8d 94 24 ac 00 
         00 00            lea edx, DWORD PTR [172+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00267 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  0026b c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00270 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00274 c7 44 24 0c 00 
+  00265 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  00269 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  0026e 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  00272 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0CA@A@_BSR32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  0027c c7 44 24 10 00 
+  0027a c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00284 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
-  00288 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  00282 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
+  00286 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:84.2
                                 ; LOE ebx esi
 .B1.17:                         ; Preds .B1.48
@@ -362,47 +362,47 @@ L1::
 ;;; #ifdef _IS_BITSCANF32
 ;;; 	status = _BSF32( &result, ( uint32_t )input );
 
-  0028d 8b 84 24 08 01 
+  0028b 8b 84 24 08 01 
         00 00            mov eax, DWORD PTR [264+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
-  00294 33 c9            xor ecx, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
-  00296 0f bc d0         bsf edx, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
+  00292 33 c9            xor ecx, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
+  00294 0f bc d0         bsf edx, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
 
 ;;; 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
-  00299 c7 84 24 b8 00 
+  00297 c7 84 24 b8 00 
         00 00 00 00 00 
         00               mov DWORD PTR [184+esp], OFFSET FLAT: ??_C@_0CA@A@_BSF32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002a4 0f 45 ce         cmovne ecx, esi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
-  002a7 89 84 24 bc 00 
+  002a2 0f 45 ce         cmovne ecx, esi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:87.11
+  002a5 89 84 24 bc 00 
         00 00            mov DWORD PTR [188+esp], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002ae 89 94 24 c0 00 
+  002ac 89 94 24 c0 00 
         00 00            mov DWORD PTR [192+esp], edx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002b5 89 8c 24 c4 00 
+  002b3 89 8c 24 c4 00 
         00 00            mov DWORD PTR [196+esp], ecx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002bc 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002bd e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  002ba 56               push esi                               ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002bb e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
                                 ; LOE eax ebx esi
 .B1.49:                         ; Preds .B1.17
-  002c2 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002c4 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002c0 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002c2 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
                                 ; LOE ebx esi edi
 .B1.18:                         ; Preds .B1.49
-  002c7 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  002c5 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
                                 ; LOE eax ebx esi edi
 .B1.50:                         ; Preds .B1.18
-  002cc 8d 94 24 bc 00 
+  002ca 8d 94 24 bc 00 
         00 00            lea edx, DWORD PTR [188+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002d3 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002d7 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002dc 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002e0 c7 44 24 0c 00 
+  002d1 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002d5 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002da 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002de c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0CA@A@_BSF32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002e8 c7 44 24 10 00 
+  002e6 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002f0 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
-  002f4 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  002ee 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
+  002f2 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:88.2
                                 ; LOE ebx esi
 .B1.19:                         ; Preds .B1.50
@@ -411,158 +411,158 @@ L1::
 ;;; #ifdef _IS_BITSCAN64
 ;;; 	printf( "\n64-bit input value: %llu\n", input );
 
-  002f9 c5 fa 7e 84 24 
-        08 01 00 00      vmovq xmm0, QWORD PTR [264+esp]        ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.42
-  00302 c7 84 24 ec 00 
+  002f7 f3 0f 7e 84 24 
+        08 01 00 00      movq xmm0, QWORD PTR [264+esp]         ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.42
+  00300 c7 84 24 ec 00 
         00 00 00 00 00 
         00               mov DWORD PTR [236+esp], OFFSET FLAT: ??_C@_0BL@A@?664?9bit?5input?5value?3?5?$CFllu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0030d c5 f9 d6 84 24 
-        f0 00 00 00      vmovq QWORD PTR [240+esp], xmm0        ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  00316 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  00318 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  0030b 66 0f d6 84 24 
+        f0 00 00 00      movq QWORD PTR [240+esp], xmm0         ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  00314 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  00316 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
                                 ; LOE eax ebx esi
 .B1.51:                         ; Preds .B1.19
-  0031d 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0031f 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  0031b 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  0031d 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
                                 ; LOE ebx esi edi
 .B1.20:                         ; Preds .B1.51
-  00322 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  00320 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
                                 ; LOE eax ebx esi edi
 .B1.52:                         ; Preds .B1.20
-  00327 8d 94 24 f0 00 
+  00325 8d 94 24 f0 00 
         00 00            lea edx, DWORD PTR [240+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0032e c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  00332 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  00337 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0033b c7 44 24 0c 00 
+  0032c f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  00330 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  00335 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  00339 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0BL@A@?664?9bit?5input?5value?3?5?$CFllu?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  00343 c7 44 24 10 00 
+  00341 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0034b 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
-  0034f e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  00349 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
+  0034d e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:91.2
                                 ; LOE ebx esi
 .B1.21:                         ; Preds .B1.52
 
 ;;; 	status = _BSR64( &result, input );
 
-  00354 8b 94 24 0c 01 
+  00352 8b 94 24 0c 01 
         00 00            mov edx, DWORD PTR [268+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  0035b 8b 8c 24 08 01 
+  00359 8b 8c 24 08 01 
         00 00            mov ecx, DWORD PTR [264+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  00362 0f bd c2         bsr eax, edx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  00365 75 0a            jne .B1.23 ; Prob 28%                  ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  00360 0f bd c2         bsr eax, edx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  00363 75 0a            jne .B1.23 ; Prob 28%                  ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
                                 ; LOE eax edx ecx ebx esi
 .B1.22:                         ; Preds .B1.21
-  00367 33 ff            xor edi, edi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  00369 0f bd c1         bsr eax, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  0036c 0f 45 fe         cmovne edi, esi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  0036f eb 05            jmp .B1.24 ; Prob 100%                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  00365 33 ff            xor edi, edi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  00367 0f bd c1         bsr eax, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  0036a 0f 45 fe         cmovne edi, esi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  0036d eb 05            jmp .B1.24 ; Prob 100%                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
                                 ; LOE eax edx ecx ebx esi edi
 .B1.23:                         ; Preds .B1.21
-  00371 83 c0 20         add eax, 32                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
-  00374 8b fe            mov edi, esi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  0036f 83 c0 20         add eax, 32                            ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
+  00372 8b fe            mov edi, esi                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:92.11
                                 ; LOE eax edx ecx ebx esi edi
 .B1.24:                         ; Preds .B1.22 .B1.23
 
 ;;; 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
 
-  00376 89 8c 24 84 00 
+  00374 89 8c 24 84 00 
         00 00            mov DWORD PTR [132+esp], ecx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  0037d 89 94 24 88 00 
+  0037b 89 94 24 88 00 
         00 00            mov DWORD PTR [136+esp], edx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  00384 89 84 24 8c 00 
+  00382 89 84 24 8c 00 
         00 00            mov DWORD PTR [140+esp], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  0038b c7 84 24 80 00 
+  00389 c7 84 24 80 00 
         00 00 00 00 00 
         00               mov DWORD PTR [128+esp], OFFSET FLAT: ??_C@_0CB@A@_BSR64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  00396 89 bc 24 90 00 
+  00394 89 bc 24 90 00 
         00 00            mov DWORD PTR [144+esp], edi           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  0039d 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  0039f e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  0039b 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  0039d e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
                                 ; LOE eax ebx esi
 .B1.53:                         ; Preds .B1.24
-  003a4 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003a6 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003a2 8b f8            mov edi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003a4 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
                                 ; LOE ebx esi edi
 .B1.25:                         ; Preds .B1.53
-  003a9 e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  003a7 e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
                                 ; LOE eax ebx esi edi
 .B1.54:                         ; Preds .B1.25
-  003ae 8d 94 24 84 00 
+  003ac 8d 94 24 84 00 
         00 00            lea edx, DWORD PTR [132+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003b5 c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003b9 c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003be 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003c2 c7 44 24 0c 00 
+  003b3 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003b7 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003bc 89 7c 24 08      mov DWORD PTR [8+esp], edi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003c0 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0CB@A@_BSR64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003ca c7 44 24 10 00 
+  003c8 c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003d2 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
-  003d6 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  003d0 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
+  003d4 e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:93.2
                                 ; LOE ebx esi
 .B1.26:                         ; Preds .B1.54
 
 ;;; 	status = _BSF64( &result, input );
 
-  003db 8b 8c 24 08 01 
+  003d9 8b 8c 24 08 01 
         00 00            mov ecx, DWORD PTR [264+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003e2 8b 94 24 0c 01 
+  003e0 8b 94 24 0c 01 
         00 00            mov edx, DWORD PTR [268+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003e9 0f bc c1         bsf eax, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003ec 75 0e            jne .B1.29 ; Prob 28%                  ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003e7 0f bc c1         bsf eax, ecx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003ea 75 0e            jne .B1.29 ; Prob 28%                  ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
                                 ; LOE eax edx ecx ebx esi
 .B1.27:                         ; Preds .B1.26
-  003ee 0f bc c2         bsf eax, edx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003f1 85 d2            test edx, edx                          ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003f3 8d 78 20         lea edi, DWORD PTR [32+eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003f6 0f 45 c7         cmovne eax, edi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
-  003f9 0f 44 f2         cmove esi, edx                         ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003ec 0f bc c2         bsf eax, edx                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003ef 85 d2            test edx, edx                          ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003f1 8d 78 20         lea edi, DWORD PTR [32+eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003f4 0f 45 c7         cmovne eax, edi                        ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
+  003f7 0f 44 f2         cmove esi, edx                         ;D:\WORK\bitscan\bitscan\bitscan.cpp:94.11
                                 ; LOE eax edx ecx ebx esi
 .B1.29:                         ; Preds .B1.26 .B1.27
 
 ;;; 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
 
-  003fc 89 8c 24 98 00 
+  003fa 89 8c 24 98 00 
         00 00            mov DWORD PTR [152+esp], ecx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00403 89 94 24 9c 00 
+  00401 89 94 24 9c 00 
         00 00            mov DWORD PTR [156+esp], edx           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0040a c7 84 24 94 00 
+  00408 c7 84 24 94 00 
         00 00 00 00 00 
         00               mov DWORD PTR [148+esp], OFFSET FLAT: ??_C@_0CB@A@_BSF64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00415 89 84 24 a0 00 
+  00413 89 84 24 a0 00 
         00 00            mov DWORD PTR [160+esp], eax           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0041c 89 b4 24 a4 00 
+  0041a 89 b4 24 a4 00 
         00 00            mov DWORD PTR [164+esp], esi           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00423 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00425 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00421 6a 01            push 1                                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  00423 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      ___acrt_iob_func                              ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
                                 ; LOE eax ebx
 .B1.55:                         ; Preds .B1.29
-  0042a 8b f0            mov esi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0042c 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  00428 8b f0            mov esi, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  0042a 83 c4 04         add esp, 4                             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
                                 ; LOE ebx esi
 .B1.30:                         ; Preds .B1.55
-  0042f e8 fc ff ff ff  ;       __local_stdio_printf_options()
+  0042d e8 fc ff ff ff  ;       __local_stdio_printf_options()
         call      ___local_stdio_printf_options                 ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
                                 ; LOE eax ebx esi
 .B1.56:                         ; Preds .B1.30
-  00434 8d 94 24 98 00 
+  00432 8d 94 24 98 00 
         00 00            lea edx, DWORD PTR [152+esp]           ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0043b c5 fa 7e 00      vmovq xmm0, QWORD PTR [eax]            ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0043f c5 f9 d6 04 24   vmovq QWORD PTR [esp], xmm0            ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00444 89 74 24 08      mov DWORD PTR [8+esp], esi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00448 c7 44 24 0c 00 
+  00439 f3 0f 7e 00      movq xmm0, QWORD PTR [eax]             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  0043d 66 0f d6 04 24   movq QWORD PTR [esp], xmm0             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  00442 89 74 24 08      mov DWORD PTR [8+esp], esi             ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  00446 c7 44 24 0c 00 
         00 00 00         mov DWORD PTR [12+esp], OFFSET FLAT: ??_C@_0CB@A@_BSF64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@ ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00450 c7 44 24 10 00 
+  0044e c7 44 24 10 00 
         00 00 00         mov DWORD PTR [16+esp], 0              ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  00458 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
-  0045c e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
+  00456 89 54 24 14      mov DWORD PTR [20+esp], edx            ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
+  0045a e8 fc ff ff ff  ;       __stdio_common_vfprintf(unsigned __int64, FILE *, const char *, _locale_t, va_list)
         call      ___stdio_common_vfprintf                      ;D:\WORK\bitscan\bitscan\bitscan.cpp:95.2
                                 ; LOE ebx
 .B1.31:                         ; Preds .B1.56
@@ -571,15 +571,15 @@ L1::
 ;;; 
 ;;; 	return EXIT_SUCCESS;
 
-  00461 33 c0            xor eax, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  00463 81 c4 78 01 00 
+  0045f 33 c0            xor eax, eax                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  00461 81 c4 78 01 00 
         00               add esp, 376                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  00469 5f               pop edi                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  0046a 5e               pop esi                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  0046b 8b e5            mov esp, ebp                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  0046d 5d               pop ebp                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  0046e c3               ret                                    ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
-  0046f 90               ALIGN     16
+  00467 5f               pop edi                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  00468 5e               pop esi                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  00469 8b e5            mov esp, ebp                           ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  0046b 5d               pop ebp                                ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  0046c c3               ret                                    ;D:\WORK\bitscan\bitscan\bitscan.cpp:98.9
+  0046d 0f 1f 00         ALIGN     16
                                 ; LOE
 ; mark_end;
 _main ENDP

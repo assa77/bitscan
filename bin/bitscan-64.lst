@@ -1,6 +1,6 @@
 ; mark_description "Intel(R) C++ Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 16.0.4.246 Build 20160811";
 ; mark_description "";
-; mark_description "-O3 -Ot -Qm64 -QxHost -nologo -W3 -Qwd1786 -Qstd=c99 -obin\\bitscan-64.exe -Fabin\\bitscan-64.lst -FAcs";
+; mark_description "-O3 -Ot -Oi -Qm64 -QxHost -nologo -W3 -Qwd1786 -Qstd=c99 -obin\\bitscan-64.exe -Fabin\\bitscan-64.lst -FAcs";
 	OPTION DOTNAME
 _TEXT	SEGMENT      'CODE'
 ;	COMDAT main
@@ -23,13 +23,12 @@ L1::
                                                            ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
   00000 57               push rdi                               ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
   00001 48 83 ec 30      sub rsp, 48                            ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
-  00005 ba fe 17 01 00   mov edx, 71678                         ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
+  00005 ba fe 03 00 00   mov edx, 1022                          ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
   0000a b9 03 00 00 00   mov ecx, 3                             ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
   0000f e8 fc ff ff ff   call __intel_new_feature_proc_init     ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.18::                        ; Preds .B1.1
-  00014 c5 f8 ae 5c 24 
-        20               vstmxcsr DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
+  00014 0f ae 5c 24 20   stmxcsr DWORD PTR [32+rsp]             ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
 
 ;;; 	unsigned long long input;
 ;;; 	unsigned result;
@@ -37,19 +36,18 @@ L1::
 ;;; 
 ;;; 	fputs( "\nBitScan - Copyright (c) 2019 by Alexander M. Albertian <assa@4ip.ru>.\nAll rights reserved.\n\n", stdout );
 
-  0001a b9 01 00 00 00   mov ecx, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:49.110
-  0001f 81 4c 24 20 40 
+  00019 b9 01 00 00 00   mov ecx, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:49.110
+  0001e 81 4c 24 20 40 
         80 00 00         or DWORD PTR [32+rsp], 32832           ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
-  00027 c5 f8 ae 54 24 
-        20               vldmxcsr DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
-  0002d e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00026 0f ae 54 24 20   ldmxcsr DWORD PTR [32+rsp]             ;D:\WORK\bitscan\bitscan\bitscan.c:44.1
+  0002b e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      __acrt_iob_func                               ;D:\WORK\bitscan\bitscan\bitscan.c:49.110
                                 ; LOE rax rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.2::                         ; Preds .B1.18
-  00032 48 8d 0d 00 00 
+  00030 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0FO@A@?6BitScan?5?9?5Copyright?5?$CIc?$CJ?52019?5by?5Alexander?5M?4?5Albertian?5?$DMassa?$EA4ip?4ru?$DO?4?6All?5rights?5reserved?4?6?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:49.2
-  00039 48 89 c2         mov rdx, rax                           ;D:\WORK\bitscan\bitscan\bitscan.c:49.2
-  0003c e8 fc ff ff ff  ;       fputs(const char *, FILE *)
+  00037 48 89 c2         mov rdx, rax                           ;D:\WORK\bitscan\bitscan\bitscan.c:49.2
+  0003a e8 fc ff ff ff  ;       fputs(const char *, FILE *)
         call      fputs                                         ;D:\WORK\bitscan\bitscan\bitscan.c:49.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.3::                         ; Preds .B1.2
@@ -57,13 +55,13 @@ L1::
 ;;; 
 ;;; 	PRINTM( __WORDSIZE );
 
-  00041 48 8d 0d 00 00 
+  0003f 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:51.2
-  00048 48 8d 15 00 00 
+  00046 48 8d 15 00 00 
         00 00            lea rdx, QWORD PTR [??_C@_0L@A@__WORDSIZE?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:51.2
-  0004f 41 b8 40 00 00 
+  0004d 41 b8 40 00 00 
         00               mov r8d, 64                            ;D:\WORK\bitscan\bitscan\bitscan.c:51.2
-  00055 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  00053 e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:51.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.4::                         ; Preds .B1.3
@@ -78,13 +76,13 @@ L1::
 ;;; #ifdef _IS_X64
 ;;; 	PRINTM( _IS_X64 );
 
-  0005a 48 8d 0d 00 00 
+  00058 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0N@A@?$CF?912s?5?3?5?$CFlu?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:60.2
-  00061 48 8d 15 00 00 
+  0005f 48 8d 15 00 00 
         00 00            lea rdx, QWORD PTR [??_C@_07A@_IS_X64?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:60.2
-  00068 41 b8 01 00 00 
+  00066 41 b8 01 00 00 
         00               mov r8d, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:60.2
-  0006e e8 fc ff ff ff  ;       printf(const char *const, ...)
+  0006c e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:60.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.5::                         ; Preds .B1.4
@@ -108,25 +106,25 @@ L1::
 ;;; 
 ;;; 	fputs( "\nInput unsigned integer> ", stdout );
 
-  00073 b9 01 00 00 00   mov ecx, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:78.39
-  00078 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
+  00071 b9 01 00 00 00   mov ecx, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:78.39
+  00076 e8 fc ff ff ff  ;       __acrt_iob_func(unsigned int)
         call      __acrt_iob_func                               ;D:\WORK\bitscan\bitscan\bitscan.c:78.39
                                 ; LOE rax rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.6::                         ; Preds .B1.5
-  0007d 48 8d 0d 00 00 
+  0007b 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0BK@A@?6Input?5unsigned?5integer?$DO?5?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:78.2
-  00084 48 89 c2         mov rdx, rax                           ;D:\WORK\bitscan\bitscan\bitscan.c:78.2
-  00087 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
+  00082 48 89 c2         mov rdx, rax                           ;D:\WORK\bitscan\bitscan\bitscan.c:78.2
+  00085 e8 fc ff ff ff  ;       fputs(const char *, FILE *)
         call      fputs                                         ;D:\WORK\bitscan\bitscan\bitscan.c:78.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.7::                         ; Preds .B1.6
 
 ;;; 	scanf( "%llu", &input );
 
-  0008c 48 8d 0d 00 00 
+  0008a 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_04A@?$CFllu?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:79.2
-  00093 48 8d 54 24 20   lea rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:79.2
-  00098 e8 fc ff ff ff  ;       scanf(const char *const, ...)
+  00091 48 8d 54 24 20   lea rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:79.2
+  00096 e8 fc ff ff ff  ;       scanf(const char *const, ...)
         call      scanf                                         ;D:\WORK\bitscan\bitscan\bitscan.c:79.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.8::                         ; Preds .B1.7
@@ -134,10 +132,10 @@ L1::
 ;;; 
 ;;; 	printf( "\n32-bit input value: %lu\n", ( unsigned long )( uint32_t )input );
 
-  0009d 48 8d 0d 00 00 
+  0009b 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0BK@A@?632?9bit?5input?5value?3?5?$CFlu?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:81.2
-  000a4 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:81.2
-  000a8 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  000a2 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:81.2
+  000a6 e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:81.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.9::                         ; Preds .B1.8
@@ -145,17 +143,17 @@ L1::
 ;;; #ifdef _IS_BITSCANR32
 ;;; 	status = _BSR32( &result, ( uint32_t )input );
 
-  000ad 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
-  000b1 bf 01 00 00 00   mov edi, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
-  000b6 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
-  000b9 44 0f bd c2      bsr r8d, edx                           ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
+  000ab 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
+  000af bf 01 00 00 00   mov edi, 1                             ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
+  000b4 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
+  000b7 44 0f bd c2      bsr r8d, edx                           ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
 
 ;;; 	printf( "_BSR32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
-  000bd 48 8d 0d 00 00 
+  000bb 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0CA@A@_BSR32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:84.2
-  000c4 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
-  000c8 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  000c2 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:83.11
+  000c6 e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:84.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 edi xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.10::                        ; Preds .B1.9
@@ -164,16 +162,16 @@ L1::
 ;;; #ifdef _IS_BITSCANF32
 ;;; 	status = _BSF32( &result, ( uint32_t )input );
 
-  000cd 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
-  000d1 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
-  000d4 44 0f bc c2      bsf r8d, edx                           ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
+  000cb 8b 54 24 20      mov edx, DWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
+  000cf 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
+  000d2 44 0f bc c2      bsf r8d, edx                           ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
 
 ;;; 	printf( "_BSF32( %lu ): %u (Success=%u)\n", ( unsigned long )( uint32_t )input, result, status );
 
-  000d8 48 8d 0d 00 00 
+  000d6 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0CA@A@_BSF32?$CI?5?$CFlu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:88.2
-  000df 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
-  000e3 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  000dd 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:87.11
+  000e1 e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:88.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 edi xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.11::                        ; Preds .B1.10
@@ -182,42 +180,42 @@ L1::
 ;;; #ifdef _IS_BITSCAN64
 ;;; 	printf( "\n64-bit input value: %llu\n", input );
 
-  000e8 48 8d 0d 00 00 
+  000e6 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0BL@A@?664?9bit?5input?5value?3?5?$CFllu?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:91.2
-  000ef 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:91.2
-  000f4 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  000ed 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:91.2
+  000f2 e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:91.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 edi xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.12::                        ; Preds .B1.11
 
 ;;; 	status = _BSR64( &result, input );
 
-  000f9 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
-  000fe 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
-  00101 4c 0f bd c2      bsr r8, rdx                            ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
+  000f7 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
+  000fc 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
+  000ff 4c 0f bd c2      bsr r8, rdx                            ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
 
 ;;; 	printf( "_BSR64( %llu ): %u (Success=%u)\n", input, result, status );
 
-  00105 48 8d 0d 00 00 
+  00103 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0CB@A@_BSR64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:93.2
-  0010c 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
-  00110 e8 fc ff ff ff  ;       printf(const char *const, ...)
+  0010a 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:92.11
+  0010e e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:93.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 edi xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.13::                        ; Preds .B1.12
 
 ;;; 	status = _BSF64( &result, input );
 
-  00115 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
-  0011a 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
-  0011d 4c 0f bc c2      bsf r8, rdx                            ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
+  00113 48 8b 54 24 20   mov rdx, QWORD PTR [32+rsp]            ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
+  00118 45 33 c9         xor r9d, r9d                           ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
+  0011b 4c 0f bc c2      bsf r8, rdx                            ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
 
 ;;; 	printf( "_BSF64( %llu ): %u (Success=%u)\n", input, result, status );
 
-  00121 48 8d 0d 00 00 
+  0011f 48 8d 0d 00 00 
         00 00            lea rcx, QWORD PTR [??_C@_0CB@A@_BSF64?$CI?5?$CFllu?5?$CJ?3?5?$CFu?5?$CISuccess?$DN?$CFu?$CJ?6?$AA@] ;D:\WORK\bitscan\bitscan\bitscan.c:95.2
-  00128 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
-  0012c e8 fc ff ff ff  ;       printf(const char *const, ...)
+  00126 44 0f 45 cf      cmovne r9d, edi                        ;D:\WORK\bitscan\bitscan\bitscan.c:94.11
+  0012a e8 fc ff ff ff  ;       printf(const char *const, ...)
         call      printf                                        ;D:\WORK\bitscan\bitscan\bitscan.c:95.2
                                 ; LOE rbx rbp rsi r12 r13 r14 r15 xmm6 xmm7 xmm8 xmm9 xmm10 xmm11 xmm12 xmm13 xmm14 xmm15
 .B1.14::                        ; Preds .B1.13
@@ -226,12 +224,12 @@ L1::
 ;;; 
 ;;; 	return EXIT_SUCCESS;
 
-  00131 33 c0            xor eax, eax                           ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
-  00133 48 83 c4 30      add rsp, 48                            ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
-  00137 5f               pop rdi                                ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
-  00138 c3               ret                                    ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
-  00139 0f 1f 80 00 00 
-        00 00            ALIGN     16
+  0012f 33 c0            xor eax, eax                           ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
+  00131 48 83 c4 30      add rsp, 48                            ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
+  00135 5f               pop rdi                                ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
+  00136 c3               ret                                    ;D:\WORK\bitscan\bitscan\bitscan.c:98.9
+  00137 66 0f 1f 84 00 
+        00 00 00 00      ALIGN     16
                                 ; LOE
 .B1.15::
 ; mark_end;

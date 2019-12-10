@@ -526,17 +526,17 @@ i$ = 8
 m$ = 16
 ?_BitScanReverse64@@YAEPEAI_K@Z PROC			; _BitScanReverse64
 
-; 865  : 	register unsigned long r;
-; 866  : 	register const unsigned char s = _BSR64( &r, m );
+; 878  : 	register unsigned long r;
+; 879  : 	register const unsigned char s = _BSR64( &r, m );
 
   00000	4c 0f bd c2	 bsr	 r8, rdx
 
-; 867  : 	return *i = static_cast< bsint_t >( r ), s;
+; 880  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00004	44 89 01	 mov	 DWORD PTR [rcx], r8d
   00007	0f 95 c0	 setne	 al
 
-; 868  : }
+; 881  : }
 
   0000a	c3		 ret	 0
 ?_BitScanReverse64@@YAEPEAI_K@Z ENDP			; _BitScanReverse64
@@ -548,17 +548,17 @@ i$ = 8
 m$ = 16
 ?_BitScanForward64@@YAEPEAI_K@Z PROC			; _BitScanForward64
 
-; 857  : 	register unsigned long r;
-; 858  : 	register const unsigned char s = _BSF64( &r, m );
+; 870  : 	register unsigned long r;
+; 871  : 	register const unsigned char s = _BSF64( &r, m );
 
   00000	4c 0f bc c2	 bsf	 r8, rdx
 
-; 859  : 	return *i = static_cast< bsint_t >( r ), s;
+; 872  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00004	44 89 01	 mov	 DWORD PTR [rcx], r8d
   00007	0f 95 c0	 setne	 al
 
-; 860  : }
+; 873  : }
 
   0000a	c3		 ret	 0
 ?_BitScanForward64@@YAEPEAI_K@Z ENDP			; _BitScanForward64
@@ -570,17 +570,17 @@ i$ = 8
 m$ = 16
 ?_BitScanReverse@@YAEPEAII@Z PROC			; _BitScanReverse
 
-; 831  : 	register unsigned long r;
-; 832  : 	register const unsigned char s = _BSR32( &r, m );
+; 847  : 	register unsigned long r;
+; 848  : 	register const unsigned char s = _BSR32( &r, m );
 
   00000	44 0f bd c2	 bsr	 r8d, edx
 
-; 833  : 	return *i = static_cast< bsint_t >( r ), s;
+; 849  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00004	44 89 01	 mov	 DWORD PTR [rcx], r8d
   00007	0f 95 c0	 setne	 al
 
-; 834  : }
+; 850  : }
 
   0000a	c3		 ret	 0
 ?_BitScanReverse@@YAEPEAII@Z ENDP			; _BitScanReverse
@@ -592,17 +592,17 @@ i$ = 8
 m$ = 16
 ?_BitScanForward@@YAEPEAII@Z PROC			; _BitScanForward
 
-; 823  : 	register unsigned long r;
-; 824  : 	register const unsigned char s = _BSF32( &r, m );
+; 839  : 	register unsigned long r;
+; 840  : 	register const unsigned char s = _BSF32( &r, m );
 
   00000	44 0f bc c2	 bsf	 r8d, edx
 
-; 825  : 	return *i = static_cast< bsint_t >( r ), s;
+; 841  : 	return *i = static_cast< bsint_t >( r ), s;
 
   00004	44 89 01	 mov	 DWORD PTR [rcx], r8d
   00007	0f 95 c0	 setne	 al
 
-; 826  : }
+; 842  : }
 
   0000a	c3		 ret	 0
 ?_BitScanForward@@YAEPEAII@Z ENDP			; _BitScanForward

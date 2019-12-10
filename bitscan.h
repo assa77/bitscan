@@ -802,6 +802,20 @@
 
 typedef unsigned int bsint_t;
 
+#if defined( _M_ALPHA ) || defined( _M_IA64 ) || defined( _M_X64 ) || defined( _M_ARM64 ) \
+	|| defined( _M_PPC64 ) || defined( _WIN64 ) || defined( __MINGW64__ )
+# ifndef WORDSIZE
+#  define WORDSIZE		64
+# endif
+# ifndef __WORDSIZE
+#  define __WORDSIZE		WORDSIZE
+# endif
+# if __WORDSIZE != WORDSIZE
+#  undef WORDSIZE
+#  define WORDSIZE		__WORDSIZE
+# endif
+#endif
+
 #if defined( _MSC_VER ) && _MSC_VER >= 1400
 
 /* Intrinsic versions */
@@ -814,6 +828,8 @@ typedef unsigned int bsint_t;
 # define _BSR32( __i, __m )	_BitScanReverse( ( __i ), ( __m ) )
 # define _IS_BITSCANF32		1
 # define _IS_BITSCANR32		1
+# pragma intrinsic( _BitScanForward )
+# pragma intrinsic( _BitScanReverse )
 
 # ifdef __cplusplus
 
@@ -835,12 +851,7 @@ unsigned char _BitScanReverse( bsint_t *i, uint32_t m ) _IS_NOTHROW
 
 # endif		/* __cplusplus */
 
-# if defined( _M_ALPHA ) || defined( _M_IA64 ) || defined( _M_X64 ) || defined( _M_ARM64 ) \
-	|| defined( _M_PPC64 ) || defined( _WIN64 ) || defined( __MINGW64__ )
-
-#  ifndef WORDSIZE
-#   define WORDSIZE		64
-#  endif
+# if defined( __WORDSIZE ) && __WORDSIZE > 32
 
 /* Prototypes: */
 /*  unsigned char _BitScanForward64( unsigned long *_Index, unsigned __int64 _Mask ); */
@@ -848,6 +859,8 @@ unsigned char _BitScanReverse( bsint_t *i, uint32_t m ) _IS_NOTHROW
 #  define _BSF64( __i, __m )	_BitScanForward64( ( __i ), ( __m ) )
 #  define _BSR64( __i, __m )	_BitScanReverse64( ( __i ), ( __m ) )
 #  define _IS_BITSCAN64		1
+#  pragma intrinsic( _BitScanForward64 )
+#  pragma intrinsic( _BitScanReverse64 )
 
 #  ifdef __cplusplus
 
@@ -869,13 +882,13 @@ unsigned char _BitScanReverse64( bsint_t *i, uint64_t m ) _IS_NOTHROW
 
 #  endif	/* __cplusplus */
 
-# else
+# else		/* !__WORDSIZE || __WORDSIZE <= 32 */
 
 #  ifndef WORDSIZE
 #   define WORDSIZE		32
 #  endif
 
-# endif
+# endif		/* __WORDSIZE && __WORDSIZE > 32 */
 
 # ifndef __WORDSIZE
 #  define __WORDSIZE		WORDSIZE
@@ -1292,6 +1305,7 @@ unsigned char _BitScanReverse64( unsigned long *i, uint64_t m ) _IS_NOTHROW
 /*  BOOLEAN BitScanForward( DWORD *Index, DWORD Mask ); */
 #  define _BSF32( __i, __m )	BitScanForward( ( __i ), ( __m ) )
 #  define _IS_BITSCANF32	1
+#  pragma intrinsic( _BitScanForward )
 
 #  ifdef __cplusplus
 
@@ -1313,6 +1327,7 @@ unsigned char BitScanForward( bsint_t *i, uint32_t m ) _IS_NOTHROW
 /*  BOOLEAN BitScanReverse( DWORD *Index, DWORD Mask ); */
 #  define _BSR32( __i, __m )	BitScanReverse( ( __i ), ( __m ) )
 #  define _IS_BITSCANR32	1
+#  pragma intrinsic( _BitScanReverse )
 
 #  ifdef __cplusplus
 
@@ -1336,6 +1351,10 @@ unsigned char BitScanReverse( bsint_t *i, uint32_t m ) _IS_NOTHROW
 #  define _BSF64( __i, __m )	BitScanForward64( ( __i ), ( __m ) )
 #  define _BSR64( __i, __m )	BitScanReverse64( ( __i ), ( __m ) )
 #  define _IS_BITSCAN64		1
+#  if defined( __WORDSIZE ) && __WORDSIZE > 32
+#   pragma intrinsic( _BitScanForward64 )
+#   pragma intrinsic( _BitScanReverse64 )
+#  endif
 
 #  ifdef __cplusplus
 

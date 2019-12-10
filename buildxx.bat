@@ -13,13 +13,13 @@ goto no_icl
 echo ICL: "%__intel__%"
 setlocal
 call "%__intel__%" ia32 >nul
-call :exec icl.exe -O3t -Qm32 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 bitscan.cpp -o%out%bitscanxx-32.exe -Fa%out%bitscanxx-32.lst -FAcs
+call :exec icl.exe -O3t -Oi -Qm32 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 bitscan.cpp -o%out%bitscanxx-32.exe -Fa%out%bitscanxx-32.lst -FAcs
 endlocal & if errorlevel 1 goto end
 setlocal
 call "%__intel__%" intel64 >nul
-call :exec icl.exe -O3t -Qm64 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 bitscan.cpp -o%out%bitscanxx-64.exe -Fa%out%bitscanxx-64.lst -FAcs
+call :exec icl.exe -O3t -Oi -Qm64 -QxHost -nologo -W3 -Qwd1786 -Qstd=c++11 bitscan.cpp -o%out%bitscanxx-64.exe -Fa%out%bitscanxx-64.lst -FAcs
 if errorlevel 1 endlocal & goto end
-call :exec icl.exe -Qmic -O3 -m64 -mmic -nologo -masm=intel -w3 -wd1786 -std=c++11 -DINTEL_SYNTAX bitscan.cpp -o%out%bitscanxx.mic -Fa%out%bitscanxx-mic.lst
+call :exec icl.exe -Qmic -O3 -m64 -mmic -nologo -masm=intel -w3 -wd1786 -std=c++11 -DINTEL_SYNTAX bitscan.cpp -o%out%bitscanxx.mic -Wa,-aln=%out%bitscanxx-mic.lst
 endlocal & if errorlevel 1 goto end
 :no_icl
 for /l %%i in (100,-1,10) do (
@@ -32,12 +32,12 @@ goto stop
 echo MSC: "%__msc__%"
 setlocal
 call "%__msc__%" x86 >nul
-call :exec cl.exe /Oxt /nologo /W3 /wd4996 bitscan.cpp /Fe%out%bitscanxx-ms32.exe /FAcs /Fa%out%bitscanxx-ms32.lst
+call :exec cl.exe /Oxt /Oi /nologo /W3 /wd4996 bitscan.cpp /Fe%out%bitscanxx-ms32.exe /FAcs /Fa%out%bitscanxx-ms32.lst
 endlocal & if errorlevel 1 goto end
 setlocal
 call "%__msc__%" amd64 >nul
 set TARGET_VS_ARCH=x86_amd64
-call :exec cl.exe /Oxt /nologo /W3 /wd4996 bitscan.cpp /Fe%out%bitscanxx-ms64.exe /FAcs /Fa%out%bitscanxx-ms64.lst
+call :exec cl.exe /Oxt /Oi /nologo /W3 /wd4996 bitscan.cpp /Fe%out%bitscanxx-ms64.exe /FAcs /Fa%out%bitscanxx-ms64.lst
 endlocal & if errorlevel 1 goto end
 if exist *.obj del /q /f *.obj >nul
 echo *** All Ok! ***
